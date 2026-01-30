@@ -180,6 +180,7 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
                         "model": id_info.get("model"),
                         "type": id_info.get("type"),
                         "state": dev.get("overview", {}).get("status"),
+                        "clients": dev.get("overview", {}).get("stationsCount", 0),
                         "lat": lat,
                         "lon": lon,
                     }

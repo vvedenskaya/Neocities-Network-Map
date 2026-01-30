@@ -43,11 +43,23 @@
   let map;
   let deviceLayer;
   let linkLayer;
+  let clientLayer;
+  let streetLayer;
+  let satelliteLayer;
   let networkData = null;
   let deviceFeatures = new Map();
   let linkFeatures = new Map();
   let selectedFeature = null;
   let adminMode = false;
+
+  const filters = {
+    showUisp: true,
+    showUnifi: true,
+    showWireless: true,
+    showWired: true,
+    onlineOnly: false,
+    minSignal: -90
+  };
 
   function getDeviceCoords(dev, source) {
     const overrides = loadPositionOverrides();
@@ -169,8 +181,20 @@
   }
 
   function initMap() {
-    const tileLayer = new ol.layer.Tile({
+    streetLayer = new ol.layer.Tile({
       source: new ol.source.OSM(),
+      visible: true,
+      maxZoom: 22, // Allow scaling tiles beyond their native zoom
+    });
+
+    satelliteLayer = new ol.layer.Tile({
+      source: new ol.source.XYZ({
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        attributions: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EBP, and the GIS User Community',
+        maxZoom: 19, // Esri usually goes up to 19
+      }),
+      visible: false,
+      maxZoom: 22, // Allow OpenLayers to upscale the tiles
     });
 
     deviceLayer = new ol.layer.Vector({
@@ -185,12 +209,26 @@
       zIndex: 5,
     });
 
+    clientLayer = new ol.layer.Vector({
+      source: new ol.source.Vector(),
+      style: new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: 2,
+          fill: new ol.style.Fill({ color: '#ffffff' }),
+          stroke: new ol.style.Stroke({ color: '#4ecdc4', width: 1 }),
+        }),
+      }),
+      zIndex: 8,
+    });
+
     map = new ol.Map({
       target: 'map',
-      layers: [tileLayer, linkLayer, deviceLayer],
+      layers: [streetLayer, satelliteLayer, linkLayer, clientLayer, deviceLayer],
       view: new ol.View({
         center: ol.proj.fromLonLat([-115.73, 33.35]),
         zoom: 14,
+        maxZoom: 22, // Allow user to zoom in deeper
+        constrainResolution: false, // Smooth zooming/scaling
       }),
     });
 
@@ -204,6 +242,51 @@
     map.on('pointermove', (e) => {
       const hit = map.hasFeatureAtPixel(e.pixel, { layerFilter: (l) => l === deviceLayer || l === linkLayer });
       map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
+
+    // Layer & Filter Listeners
+    document.querySelectorAll('input[name="base-layer"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const isSat = e.target.value === 'satellite';
+        streetLayer.setVisible(!isSat);
+        satelliteLayer.setVisible(isSat);
+      });
+    });
+
+    document.getElementById('layer-uisp').addEventListener('change', (e) => {
+      filters.showUisp = e.target.checked;
+      renderDevices();
+      renderLinks();
+    });
+
+    document.getElementById('layer-unifi').addEventListener('change', (e) => {
+      filters.showUnifi = e.target.checked;
+      renderDevices();
+      renderLinks();
+    });
+
+    document.getElementById('layer-wireless').addEventListener('change', (e) => {
+      filters.showWireless = e.target.checked;
+      renderLinks();
+    });
+
+    document.getElementById('layer-wired').addEventListener('change', (e) => {
+      filters.showWired = e.target.checked;
+      renderLinks();
+    });
+
+    document.getElementById('filter-online-only').addEventListener('change', (e) => {
+      filters.onlineOnly = e.target.checked;
+      renderDevices();
+      renderLinks();
+    });
+
+    const signalRange = document.getElementById('filter-signal');
+    const signalLabel = document.getElementById('signal-value');
+    signalRange.addEventListener('input', (e) => {
+      filters.minSignal = parseInt(e.target.value, 10);
+      signalLabel.textContent = filters.minSignal;
+      renderLinks();
     });
 
     document.getElementById('refresh-btn').addEventListener('click', loadData);
@@ -278,31 +361,97 @@
 
   function renderDevices() {
     const centroid = computeCentroid(networkData?.uisp || []);
-    const overrides = loadPositionOverrides();
     const deviceSource = deviceLayer.getSource();
+    const clientSource = clientLayer.getSource();
     deviceSource.clear();
+    clientSource.clear();
     deviceFeatures.clear();
 
-    for (const dev of networkData?.unifi || []) {
-      const pos = resolveDevicePosition(dev, 'unifi', centroid);
-      if (!pos) continue;
-      const feature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([pos.lon, pos.lat])),
-      });
-      feature.set('device', { ...dev, source: 'unifi', lat: pos.lat, lon: pos.lon });
-      deviceSource.addFeature(feature);
-      deviceFeatures.set(dev.id, feature);
+    if (filters.showUnifi) {
+      for (const dev of networkData?.unifi || []) {
+        const isOffline = dev.state === 0;
+        if (filters.onlineOnly && isOffline) continue;
+
+        const pos = resolveDevicePosition(dev, 'unifi', centroid);
+        if (!pos) continue;
+
+        // Add a small fixed jitter based on ID if the device is at the exact centroid
+        let lon = pos.lon;
+        let lat = pos.lat;
+        const isAtCentroid = centroid && 
+                             Math.abs(pos.lat - centroid.lat) < 0.000001 && 
+                             Math.abs(pos.lon - centroid.lon) < 0.000001;
+
+        if (isAtCentroid) {
+          // Use a deterministic jitter based on MAC address/ID so it doesn't jump around
+          const hash = (dev.id || '').split('').reduce((a, b) => {
+            a = ((a << 5) - a) + b.charCodeAt(0);
+            return a & a;
+          }, 0);
+          const angle = Math.abs(hash % 360) * (Math.PI / 180);
+          const dist = 0.0004 + (Math.abs(hash % 100) / 20000); // 40-90 meters spread
+          lon += Math.cos(angle) * dist;
+          lat += Math.sin(angle) * dist;
+        }
+
+        const feature = new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat])),
+        });
+        feature.set('device', { ...dev, source: 'unifi', lat: lat, lon: lon });
+        deviceSource.addFeature(feature);
+        deviceFeatures.set(dev.id, feature);
+
+        // Render client swarm
+        if (!isOffline && dev.clients > 0) {
+          const deviceProjCoord = ol.proj.fromLonLat([lon, lat]);
+          for (let i = 0; i < dev.clients; i++) {
+            // Random orbit around device
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 10 + Math.random() * 15; // 10-25 meters/units offset
+            const clientCoord = [
+              deviceProjCoord[0] + Math.cos(angle) * distance,
+              deviceProjCoord[1] + Math.sin(angle) * distance
+            ];
+            const clientFeature = new ol.Feature({
+              geometry: new ol.geom.Point(clientCoord)
+            });
+            clientSource.addFeature(clientFeature);
+          }
+        }
+      }
     }
 
-    for (const dev of networkData?.uisp || []) {
-      const pos = resolveDevicePosition(dev, 'uisp', null);
-      if (!pos) continue;
-      const feature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([pos.lon, pos.lat])),
-      });
-      feature.set('device', { ...dev, source: 'uisp', lat: pos.lat, lon: pos.lon });
-      deviceSource.addFeature(feature);
-      deviceFeatures.set(dev.id, feature);
+    if (filters.showUisp) {
+      for (const dev of networkData?.uisp || []) {
+        const isOffline = dev.state === 'disconnected';
+        if (filters.onlineOnly && isOffline) continue;
+
+        const pos = resolveDevicePosition(dev, 'uisp', null);
+        if (!pos) continue;
+        const feature = new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.fromLonLat([pos.lon, pos.lat])),
+        });
+        feature.set('device', { ...dev, source: 'uisp', lat: pos.lat, lon: pos.lon });
+        deviceSource.addFeature(feature);
+        deviceFeatures.set(dev.id, feature);
+
+        // Render client swarm for UISP
+        if (!isOffline && dev.clients > 0) {
+          const deviceProjCoord = ol.proj.fromLonLat([pos.lon, pos.lat]);
+          for (let i = 0; i < dev.clients; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 12 + Math.random() * 18;
+            const clientCoord = [
+              deviceProjCoord[0] + Math.cos(angle) * distance,
+              deviceProjCoord[1] + Math.sin(angle) * distance
+            ];
+            const clientFeature = new ol.Feature({
+              geometry: new ol.geom.Point(clientCoord)
+            });
+            clientSource.addFeature(clientFeature);
+          }
+        }
+      }
     }
   }
 
@@ -312,6 +461,21 @@
     linkFeatures.clear();
 
     for (const link of networkData?.links || []) {
+      const isWireless = link.type === 'wireless';
+      const isWired = link.type === 'wired_unifi';
+      
+      if (isWireless && !filters.showWireless) continue;
+      if (isWired && !filters.showWired) continue;
+      if (isWireless && link.signal != null && link.signal < filters.minSignal) continue;
+      
+      const fromDev = getDeviceById(link.from);
+      const toDev = getDeviceById(link.to);
+      if (filters.onlineOnly) {
+        const fromOffline = fromDev?.source === 'uisp' ? fromDev.state === 'disconnected' : fromDev?.state === 0;
+        const toOffline = toDev?.source === 'uisp' ? toDev.state === 'disconnected' : toDev?.state === 0;
+        if (fromOffline || toOffline) continue;
+      }
+
       const ep = getLinkEndpoints(link);
       if (!ep) continue;
       const line = new ol.geom.LineString([

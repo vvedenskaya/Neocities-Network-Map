@@ -21,6 +21,34 @@
     </header>
 
     <main class="main">
+      <aside class="sidebar">
+        <section class="controls-group">
+          <h3>Map Layers</h3>
+          <div class="layer-selector">
+            <label><input type="radio" name="base-layer" value="osm" checked> Streets</label>
+            <label><input type="radio" name="base-layer" value="satellite"> Satellite</label>
+          </div>
+        </section>
+
+        <section class="controls-group">
+          <h3>Visibility</h3>
+          <label><input type="checkbox" id="layer-uisp" checked> UISP Devices</label>
+          <label><input type="checkbox" id="layer-unifi" checked> UniFi Devices</label>
+          <label><input type="checkbox" id="layer-wireless" checked> Wireless Links</label>
+          <label><input type="checkbox" id="layer-wired" checked> Wired Links</label>
+        </section>
+
+        <section class="controls-group">
+          <h3>Filters</h3>
+          <label><input type="checkbox" id="filter-online-only"> Online Only</label>
+          
+          <div class="filter-range">
+            <label for="filter-signal">Min Signal (dBm): <span id="signal-value">-90</span></label>
+            <input type="range" id="filter-signal" min="-90" max="-40" value="-90">
+          </div>
+        </section>
+      </aside>
+
       <div id="map" class="map"></div>
 
       <aside id="inspector" class="inspector hidden">

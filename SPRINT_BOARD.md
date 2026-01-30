@@ -74,6 +74,7 @@ Interactive map visualization of the Mars College and Bombay Beach Neocities LAN
 | M2.5 | Filter: link state (active/disconnected) | Toggle to show/hide disconnected links |
 | M2.6 | Filter: signal strength threshold | Slider or input: only show links weaker than X dBm (e.g. -60) |
 | M2.7 | Filter: device type | Checkboxes to show/hide uap, usw, airMax |
+| M2.8 | Base layer toggle | Switch between Street (OSM) and Satellite (Bing/Stadia) views |
 
 ---
 
@@ -86,6 +87,12 @@ Interactive map visualization of the Mars College and Bombay Beach Neocities LAN
 | M3.1 | Search by device name | Search input; filter/zoom to matching devices |
 | M3.2 | Zoom-to-device | Click in search results or list → pan/zoom map to device |
 | M3.3 | Legend | Legend showing device shapes, link colors, signal scale |
+
+### Epic: Advanced Visuals & Overlays
+
+| ID | Task | Acceptance Criteria |
+|----|------|---------------------|
+| M3.7 | Drone shots overlay | Support for high-resolution GeoTIFF/COGS overlays from drone footage |
 
 ### Epic: Responsive & UX
 
@@ -107,7 +114,8 @@ Interactive map visualization of the Mars College and Bombay Beach Neocities LAN
 - **Hosting**: GitHub Pages (static HTML/JS)
 - **Data**: `network_data.json` loaded on page load; refresh button to re-fetch
 - **Persistence**: Manual device positions stored separately (JSON file or localStorage); merged at render time
-- **Map tiles**: Online only (OSM, Stadia, Bing); no stitched/static images
+- **Map tiles**: Multi-layer support (OSM for streets, Bing/Google for satellite)
+- **Static Overlays**: Future support for Drone GeoTIFFs (requires OpenLayers GeoTIFF source/WebGL tile layer)
 - **Device thumbnails**: Use Ubiquiti product images or placeholder; consider CDN or local assets
 
 ---
