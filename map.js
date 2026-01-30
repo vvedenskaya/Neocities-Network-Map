@@ -1,0 +1,404 @@
+/**
+ * Bombay Mars LAN Map - Sprint 1
+ * Interactive map of Mars College / Bombay Beach Neocities network.
+ */
+
+(function () {
+  'use strict';
+
+  const STORAGE_KEY = 'bombay-mars-device-positions';
+  const DATA_URL = 'network_data.json';
+
+  // Device model thumbnails (Ubiquiti product images or placeholder)
+  const MODEL_IMAGES = {
+    'U7LR': 'https://images.ubnt.com/ubnt/products/u7-lr/ubnt-u7-lr-front.png',
+    'U7MSH': 'https://images.ubnt.com/ubnt/products/u7-mesh/ubnt-u7-mesh-front.png',
+    'U7PG2': 'https://images.ubnt.com/ubnt/products/u7-pro/ubnt-u7-pro-front.png',
+    'UKPW': 'https://images.ubnt.com/ubnt/products/u7-outdoor/ubnt-u7-outdoor-front.png',
+    'U7LT': 'https://images.ubnt.com/ubnt/products/u7-lite/ubnt-u7-lite-front.png',
+    'U7NHD': 'https://images.ubnt.com/ubnt/products/u7-nano-hd/ubnt-u7-nano-hd-front.png',
+    'US8P60': 'https://images.ubnt.com/ubnt/products/us-8-60w/ubnt-us-8-60w-front.png',
+    'US8P150': 'https://images.ubnt.com/ubnt/products/us-8-150w/ubnt-us-8-150w-front.png',
+    'Loco5AC': 'https://images.ubnt.com/ubnt/products/loco5ac/ubnt-loco5ac-front.png',
+    'LBE-5AC-Gen2': 'https://images.ubnt.com/ubnt/products/lbe-5ac-gen2/ubnt-lbe-5ac-gen2-front.png',
+    'NBE-5AC-Gen2': 'https://images.ubnt.com/ubnt/products/nbe-5ac-gen2/ubnt-nbe-5ac-gen2-front.png',
+    'LAP-GPS': 'https://images.ubnt.com/ubnt/products/lap-gps/ubnt-lap-gps-front.png',
+    'LAP-120': 'https://images.ubnt.com/ubnt/products/lap-120/ubnt-lap-120-front.png',
+  };
+
+  // Signal strength color gradient (dBm -> color)
+  function signalColor(dbm) {
+    if (dbm == null || dbm === undefined) return '#9aa0a6';
+    if (dbm >= -55) return '#34a853'; // green
+    if (dbm >= -65) return '#f9ab00';  // yellow
+    return '#ea4335';                  // red
+  }
+
+  function signalWidth(dbm) {
+    if (dbm == null || dbm === undefined) return 2;
+    const strength = Math.max(-90, Math.min(-40, dbm));
+    return 2 + ((strength + 90) / 50) * 4; // 2–6px
+  }
+
+  let map;
+  let deviceLayer;
+  let linkLayer;
+  let networkData = null;
+  let deviceFeatures = new Map();
+  let linkFeatures = new Map();
+  let selectedFeature = null;
+  let adminMode = false;
+
+  function getDeviceCoords(dev, source) {
+    const overrides = loadPositionOverrides();
+    const override = overrides[dev.id];
+    if (override) return { lat: override.lat, lon: override.lon };
+    if (dev.lat != null && dev.lon != null) return { lat: dev.lat, lon: dev.lon };
+    if (dev.x != null && dev.y != null) return { lat: dev.y, lon: dev.x };
+    return null;
+  }
+
+  function computeCentroid(uispDevices) {
+    const withCoords = (uispDevices || []).filter(d => d.lat != null && d.lon != null);
+    if (withCoords.length === 0) return null;
+    const lat = withCoords.reduce((s, d) => s + d.lat, 0) / withCoords.length;
+    const lon = withCoords.reduce((s, d) => s + d.lon, 0) / withCoords.length;
+    return { lat, lon };
+  }
+
+  function resolveDevicePosition(dev, source, centroid) {
+    const coords = getDeviceCoords(dev, source);
+    if (coords) return coords;
+    if (source === 'unifi' && centroid) return centroid;
+    return null;
+  }
+
+  function loadPositionOverrides() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  }
+
+  function savePositionOverride(id, lat, lon) {
+    const overrides = loadPositionOverrides();
+    overrides[id] = { lat, lon };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+  }
+
+  function getDeviceById(id) {
+    for (const dev of (networkData?.unifi || [])) if (dev.id === id) return { ...dev, source: 'unifi' };
+    for (const dev of (networkData?.uisp || [])) if (dev.id === id) return { ...dev, source: 'uisp' };
+    return null;
+  }
+
+  function getLinkEndpoints(link) {
+    const fromDev = getDeviceById(link.from);
+    const toDev = getDeviceById(link.to);
+    const centroid = computeCentroid(networkData?.uisp || []);
+    if (!fromDev || !toDev) return null;
+    const fromPos = resolveDevicePosition(fromDev, fromDev.source, centroid);
+    const toPos = resolveDevicePosition(toDev, toDev.source, centroid);
+    if (!fromPos || !toPos) return null;
+    return { from: fromPos, to: toPos };
+  }
+
+  function createDeviceStyle(feature, selected) {
+    const dev = feature.get('device');
+    const isOffline = dev.source === 'uisp'
+      ? (dev.state === 'disconnected')
+      : (dev.state === 0);
+    const type = dev.type || 'uap';
+    let fill = selected ? '#4ecdc4' : (isOffline ? '#5f6368' : '#4ecdc4');
+    let stroke = selected ? '#fff' : (isOffline ? '#3c4043' : '#3ba89f');
+    let radius = 6;
+    let shape = 'circle';
+
+    if (type === 'usw') {
+      radius = 7;
+      shape = 'square';
+    } else if (type === 'airMax') {
+      radius = 8;
+      shape = 'triangle';
+    }
+
+    return new ol.style.Style({
+      image: shape === 'square'
+        ? new ol.style.RegularShape({
+            fill: new ol.style.Fill({ color: fill }),
+            stroke: new ol.style.Stroke({ color: stroke, width: 2 }),
+            points: 4,
+            angle: Math.PI / 4,
+            radius: radius,
+          })
+        : shape === 'triangle'
+        ? new ol.style.RegularShape({
+            fill: new ol.style.Fill({ color: fill }),
+            stroke: new ol.style.Stroke({ color: stroke, width: 2 }),
+            points: 3,
+            angle: 0,
+            radius: radius,
+          })
+        : new ol.style.Circle({
+            fill: new ol.style.Fill({ color: fill }),
+            stroke: new ol.style.Stroke({ color: stroke, width: 2 }),
+            radius: radius,
+          }),
+    });
+  }
+
+  function createLinkStyle(feature, selected) {
+    const link = feature.get('link');
+    const color = link.type === 'wireless' && link.signal != null
+      ? signalColor(link.signal)
+      : '#9aa0a6';
+    const width = link.type === 'wireless' && link.signal != null
+      ? signalWidth(link.signal)
+      : 2;
+    const opacity = selected ? 1 : 0.85;
+
+    return new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: color,
+        width: selected ? width + 2 : width,
+        lineDash: link.type === 'wired_unifi' ? [4, 4] : [],
+      }),
+    });
+  }
+
+  function initMap() {
+    const tileLayer = new ol.layer.Tile({
+      source: new ol.source.OSM(),
+    });
+
+    deviceLayer = new ol.layer.Vector({
+      source: new ol.source.Vector(),
+      style: (feature) => createDeviceStyle(feature, feature === selectedFeature),
+      zIndex: 10,
+    });
+
+    linkLayer = new ol.layer.Vector({
+      source: new ol.source.Vector(),
+      style: (feature) => createLinkStyle(feature, feature === selectedFeature),
+      zIndex: 5,
+    });
+
+    map = new ol.Map({
+      target: 'map',
+      layers: [tileLayer, linkLayer, deviceLayer],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([-115.73, 33.35]),
+        zoom: 14,
+      }),
+    });
+
+    map.on('click', (e) => {
+      map.forEachFeatureAtPixel(e.pixel, (f) => {
+        selectFeature(f);
+        return true;
+      }, { layerFilter: (l) => l === deviceLayer || l === linkLayer });
+    });
+
+    map.on('pointermove', (e) => {
+      const hit = map.hasFeatureAtPixel(e.pixel, { layerFilter: (l) => l === deviceLayer || l === linkLayer });
+      map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
+
+    document.getElementById('refresh-btn').addEventListener('click', loadData);
+    document.getElementById('admin-mode').addEventListener('change', (e) => {
+      adminMode = e.target.checked;
+      updateDeviceInteractivity();
+    });
+    document.getElementById('inspector-close').addEventListener('click', () => {
+      selectFeature(null);
+    });
+  }
+
+  function selectFeature(feature) {
+    selectedFeature = feature;
+    deviceLayer.changed();
+    linkLayer.changed();
+    showInspector(feature);
+  }
+
+  function showInspector(feature) {
+    const panel = document.getElementById('inspector');
+    const content = document.getElementById('inspector-content');
+    const title = document.getElementById('inspector-title');
+
+    if (!feature) {
+      panel.classList.add('hidden');
+      return;
+    }
+
+    panel.classList.remove('hidden');
+    const dev = feature.get('device');
+    const link = feature.get('link');
+
+    if (dev) {
+      title.textContent = 'Device';
+      const imgUrl = MODEL_IMAGES[dev.model];
+      const thumbHtml = imgUrl
+        ? `<div class="device-thumb"><img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(dev.model || '')}" onerror="this.parentElement.innerHTML='📡'"></div>`
+        : `<div class="device-thumb">📡</div>`;
+      content.innerHTML = `
+        ${thumbHtml}
+        <dl>
+          <dt>Name</dt><dd>${escapeHtml(dev.name || '-')}</dd>
+          <dt>Model</dt><dd>${escapeHtml(dev.model || '-')}</dd>
+          <dt>Type</dt><dd>${dev.type || '-'}</dd>
+          <dt>State</dt><dd class="${dev.source === 'uisp' ? (dev.state === 'active' ? 'state-online' : 'state-offline') : (dev.state === 1 ? 'state-online' : 'state-offline')}">${dev.source === 'uisp' ? dev.state : (dev.state === 1 ? 'Online' : 'Offline')}</dd>
+          ${dev.clients != null ? `<dt>Clients</dt><dd>${dev.clients}</dd>` : ''}
+          <dt>Coordinates</dt><dd>${(dev.lat != null && dev.lon != null) ? `${dev.lat.toFixed(5)}, ${dev.lon.toFixed(5)}` : '-'}</dd>
+        </dl>
+      `;
+    } else if (link) {
+      title.textContent = 'Link';
+      const fromDev = getDeviceById(link.from);
+      const toDev = getDeviceById(link.to);
+      content.innerHTML = `
+        <dl>
+          <dt>From</dt><dd>${escapeHtml(fromDev?.name || link.from)}</dd>
+          <dt>To</dt><dd>${escapeHtml(toDev?.name || link.to)}</dd>
+          <dt>Type</dt><dd>${link.type || '-'}</dd>
+          <dt>State</dt><dd>${link.state || '-'}</dd>
+          ${link.signal != null ? `<dt>Signal</dt><dd>${link.signal} dBm</dd>` : ''}
+        </dl>
+      `;
+    }
+  }
+
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function renderDevices() {
+    const centroid = computeCentroid(networkData?.uisp || []);
+    const overrides = loadPositionOverrides();
+    const deviceSource = deviceLayer.getSource();
+    deviceSource.clear();
+    deviceFeatures.clear();
+
+    for (const dev of networkData?.unifi || []) {
+      const pos = resolveDevicePosition(dev, 'unifi', centroid);
+      if (!pos) continue;
+      const feature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([pos.lon, pos.lat])),
+      });
+      feature.set('device', { ...dev, source: 'unifi', lat: pos.lat, lon: pos.lon });
+      deviceSource.addFeature(feature);
+      deviceFeatures.set(dev.id, feature);
+    }
+
+    for (const dev of networkData?.uisp || []) {
+      const pos = resolveDevicePosition(dev, 'uisp', null);
+      if (!pos) continue;
+      const feature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([pos.lon, pos.lat])),
+      });
+      feature.set('device', { ...dev, source: 'uisp', lat: pos.lat, lon: pos.lon });
+      deviceSource.addFeature(feature);
+      deviceFeatures.set(dev.id, feature);
+    }
+  }
+
+  function renderLinks() {
+    const linkSource = linkLayer.getSource();
+    linkSource.clear();
+    linkFeatures.clear();
+
+    for (const link of networkData?.links || []) {
+      const ep = getLinkEndpoints(link);
+      if (!ep) continue;
+      const line = new ol.geom.LineString([
+        ol.proj.fromLonLat([ep.from.lon, ep.from.lat]),
+        ol.proj.fromLonLat([ep.to.lon, ep.to.lat]),
+      ]);
+      const feature = new ol.Feature({ geometry: line });
+      feature.set('link', link);
+      linkSource.addFeature(feature);
+      linkFeatures.set(`${link.from}-${link.to}`, feature);
+    }
+  }
+
+  let modifyInteraction = null;
+
+  function updateDeviceInteractivity() {
+    if (modifyInteraction) {
+      map.removeInteraction(modifyInteraction);
+      modifyInteraction = null;
+    }
+    if (!adminMode) return;
+
+    modifyInteraction = new ol.interaction.Modify({
+      source: deviceLayer.getSource(),
+      filter: (f) => f.get('device')?.source === 'unifi',
+    });
+    map.addInteraction(modifyInteraction);
+
+    modifyInteraction.on('modifyend', (e) => {
+      e.features.forEach((f) => {
+        const dev = f.get('device');
+        if (dev?.source !== 'unifi') return;
+        const coord = f.getGeometry().getCoordinates();
+        const lonlat = ol.proj.toLonLat(coord);
+        savePositionOverride(dev.id, lonlat[1], lonlat[0]);
+        dev.lat = lonlat[1];
+        dev.lon = lonlat[0];
+        renderLinks();
+      });
+    });
+  }
+
+  function fitMapToData() {
+    const meta = networkData?.map_metadata;
+    if (meta?.lat_min != null && meta?.lat_max != null && meta?.lon_min != null && meta?.lon_max != null) {
+      map.getView().fit(
+        ol.proj.transformExtent([meta.lon_min, meta.lat_min, meta.lon_max, meta.lat_max], 'EPSG:4326', 'EPSG:3857'),
+        { padding: [40, 40, 40, 40], maxZoom: 16 }
+      );
+    }
+  }
+
+  function loadData() {
+    const btn = document.getElementById('refresh-btn');
+    btn.disabled = true;
+    btn.textContent = 'Loading…';
+
+    fetch(DATA_URL)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        networkData = data;
+        renderDevices();
+        renderLinks();
+        fitMapToData();
+        selectFeature(null);
+      })
+      .catch((err) => {
+        console.error('Failed to load network data:', err);
+        alert('Could not load network_data.json. Run the collector first or check the file path.');
+      })
+      .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Refresh';
+      });
+  }
+
+  function run() {
+    initMap();
+    loadData();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();

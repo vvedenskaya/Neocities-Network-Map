@@ -49,14 +49,27 @@ python network_collector.py
 
 This produces `network_data.json` and `network_data.tsv`.
 
-### 2. View the Map (Coming Soon)
+### 2. View the Map
 
-The interactive map will be a static web app (HTML/JS + OpenLayers) hosted on GitHub Pages. It will:
+Serve the map locally (requires `network_data.json` from step 1):
 
-- Load `network_data.json` on page load
-- Display devices and links on an online map
-- Allow filtering, search, and manual placement of UniFi devices
-- Show signal strength via color and thickness of connection lines
+```bash
+# Python 3
+python -m http.server 8000
+```
+
+Then open [http://localhost:8000](http://localhost:8000) in your browser.
+
+For GitHub Pages, push the repo and enable Pages in Settings → Pages → Source: main branch.
+
+The map:
+
+- Loads `network_data.json` on page load (Refresh button to reload)
+- Displays UISP and UniFi devices as points; wireless and wired links as lines
+- Styles devices by type (circle=AP, square=switch, triangle=airMax); greys out disconnected
+- Shows signal strength via color (green/yellow/red) and line thickness
+- Inspector panel on click for device/link details
+- Admin mode: enable "Admin (drag UniFi)" to drag UniFi devices; positions persist in localStorage
 
 See [SPRINT_BOARD.md](SPRINT_BOARD.md) for the full roadmap.
 
