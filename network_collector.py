@@ -14,6 +14,20 @@ from dotenv import load_dotenv
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 load_dotenv()
 
+UNIFI_POSITION_LOOKUP = "unifi_position_lookup.json"
+
+
+def load_unifi_position_lookup():
+    """Load manually measured UniFi device positions. Returns dict of mac -> {lat, lon}."""
+    if not os.path.exists(UNIFI_POSITION_LOOKUP):
+        return {}
+    try:
+        with open(UNIFI_POSITION_LOOKUP, encoding="utf-8") as f:
+            data = json.load(f)
+        return {k: v for k, v in data.items() if not k.startswith("_") and isinstance(v, dict)}
+    except (json.JSONDecodeError, OSError):
+        return {}
+
 
 class UniFiCollector:
     """Collects devices from UniFi Network Controller API."""
@@ -99,9 +113,10 @@ class UISPCollector:
 def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
     """
     Combine UniFi and UISP data into a unified structure for the map.
-    UniFi devices without coordinates get centroid of UISP devices as default.
+    UniFi device coordinates: manual lookup > API x/y > centroid of UISP devices.
     """
     combined = {"unifi": [], "uisp": [], "links": [], "map_metadata": {}}
+    position_lookup = load_unifi_position_lookup()
 
     # Build site coords lookup
     site_map = {}
@@ -186,11 +201,18 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
                     }
                 )
 
-    # Compute centroid for UniFi default placement (devices without coords)
+    # Assign coordinates to UniFi devices: manual lookup > API x/y > centroid
     centroid_lat = sum(lats) / len(lats) if lats else None
     centroid_lon = sum(lons) / len(lons) if lons else None
     for dev in combined["unifi"]:
-        if dev.get("x") is None and dev.get("y") is None and centroid_lat and centroid_lon:
+        manual = position_lookup.get(dev["id"])
+        if manual and manual.get("lat") is not None and manual.get("lon") is not None:
+            dev["lat"] = float(manual["lat"])
+            dev["lon"] = float(manual["lon"])
+        elif dev.get("x") is not None and dev.get("y") is not None:
+            dev["lat"] = float(dev["y"])
+            dev["lon"] = float(dev["x"])
+        elif centroid_lat and centroid_lon:
             dev["lat"] = centroid_lat
             dev["lon"] = centroid_lon
 

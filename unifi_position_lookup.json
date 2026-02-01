@@ -1,0 +1,6 @@
+{
+  "_comment": "Manually measured lat/lon for UniFi access points. Add entries as you measure devices. MAC address (id) is the key. Include name for human readability.",
+  "68:d7:9a:d3:b0:22": { "name": "AP - Chiba North - B0:22 - AC LR", "lat": 33.3621568, "lon": -115.7139224 },
+  "68:d7:9a:2a:91:e1": { "name": "AP - Chiba Media Lab Ceiling - Nano HD", "lat": 33.3623447, "lon": -115.7139680 },
+  "f4:e2:c6:23:8f:f7": { "name": "AP - Chiba Mimos/Kitchen - 19d3 - AC Mesh", "lat": 33.3622985, "lon": -115.7138245 }
+}

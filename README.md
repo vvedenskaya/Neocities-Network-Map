@@ -18,12 +18,26 @@ Data is collected from:
 ## Project Structure
 
 ```
-├── network_collector.py   # Fetches data from UniFi + UISP APIs
-├── network_data.json     # Output: devices and links (generated)
-├── network_data.tsv      # Output: device list (generated)
-├── SPRINT_BOARD.md       # Development tasks and acceptance criteria
-└── README.md             # This file
+├── network_collector.py       # Fetches data from UniFi + UISP APIs
+├── unifi_position_lookup.json # Manual lat/lon overrides for UniFi APs (edit to add measured positions)
+├── network_data.json         # Output: devices and links (generated)
+├── network_data.tsv          # Output: device list (generated)
+├── SPRINT_BOARD.md           # Development tasks and acceptance criteria
+└── README.md                 # This file
 ```
+
+### UniFi Position Lookup
+
+UniFi access points don't have GPS coordinates from the API. The collector uses a centroid of UISP devices as a default. For accurate placement, add manually measured coordinates to `unifi_position_lookup.json`:
+
+```json
+{
+  "68:d7:9a:d3:b0:22": { "name": "AP - Chiba North - B0:22 - AC LR", "lat": 33.3621568, "lon": -115.7139224 },
+  "68:d7:9a:2a:91:e1": { "name": "AP - Chiba Media Lab Ceiling - Nano HD", "lat": 33.3623447, "lon": -115.7139680 }
+}
+```
+
+Use the device MAC address (id) as the key. When the collector runs, these positions override the centroid for matching devices.
 
 ## Quick Start
 
