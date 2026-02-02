@@ -6,7 +6,6 @@ Outputs JSON and TSV for the interactive map visualization.
 
 import json
 import os
-import csv
 import urllib3
 import requests
 from dotenv import load_dotenv
@@ -267,34 +266,6 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
     return combined
 
 
-def export_to_tsv(data, filename="network_data.tsv"):
-    """Export device list to TSV."""
-    all_devices = []
-    for source in ["uisp", "unifi"]:
-        if isinstance(data.get(source), list):
-            for device in data[source]:
-                all_devices.append(
-                    {
-                        "name": device.get("name", ""),
-                        "model": device.get("model", ""),
-                        "type": device.get("type", ""),
-                        "state": device.get("state", ""),
-                        "lat": device.get("lat", ""),
-                        "lon": device.get("lon", ""),
-                    }
-                )
-    if all_devices:
-        with open(filename, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(
-                f,
-                fieldnames=["name", "model", "type", "state", "lat", "lon"],
-                delimiter="\t",
-            )
-            writer.writeheader()
-            writer.writerows(all_devices)
-        print(f"  ✓ Exported {len(all_devices)} devices to {filename}")
-
-
 def main():
     UNIFI_URL = os.getenv("UNIFI_URL")
     UNIFI_KEY = os.getenv("UNIFI_KEY")
@@ -322,7 +293,6 @@ def main():
     with open("network_data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    export_to_tsv(data)
     print(
         f"\n--- Results ---\n"
         f"UniFi: {len(data['unifi'])} | UISP: {len(data['uisp'])} | "

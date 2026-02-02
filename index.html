@@ -17,6 +17,7 @@
           <input type="checkbox" id="admin-mode" />
           <span>Admin (drag UniFi)</span>
         </label>
+        <button id="export-positions-btn" class="secondary-btn" title="Export unifi_position_lookup.json">Export JSON</button>
       </div>
     </header>
 
@@ -36,6 +37,19 @@
           <label><input type="checkbox" id="layer-unifi" checked> UniFi Devices</label>
           <label><input type="checkbox" id="layer-wireless" checked> Wireless Links</label>
           <label><input type="checkbox" id="layer-wired" checked> Wired Links</label>
+        </section>
+
+        <section class="controls-group">
+          <div class="section-header">
+            <h3>Devices</h3>
+            <button id="toggle-device-list" class="toggle-btn" title="Toggle Device List">▼</button>
+          </div>
+          <div id="device-list-container" class="collapsible-content">
+            <input type="text" id="device-search" placeholder="Search devices..." class="search-input">
+            <div id="device-list" class="device-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
         </section>
 
         <section class="controls-group">

@@ -89,7 +89,7 @@ body {
 }
 
 .sidebar {
-  width: 240px;
+  width: 280px;
   background: var(--bg-panel);
   border-right: 1px solid var(--border);
   padding: 1rem;
@@ -97,6 +97,118 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   overflow-y: auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.section-header h3 {
+  margin: 0;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  transition: transform 0.2s;
+}
+
+.toggle-btn.collapsed {
+  transform: rotate(-90deg);
+}
+
+.collapsible-content.hidden {
+  display: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.device-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-dark);
+}
+
+.device-item {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.device-item:last-child {
+  border-bottom: none;
+}
+
+.device-item:hover {
+  background: var(--bg-hover);
+}
+
+.device-item.selected {
+  background: var(--bg-hover);
+  border-left: 3px solid var(--accent);
+}
+
+.device-item .device-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.device-item .device-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  flex-shrink: 0;
+}
+
+.device-status.online { background: var(--success); }
+.device-status.offline { background: var(--offline); }
+
+.secondary-btn {
+  padding: 0.4rem 0.8rem;
+  background: var(--bg-hover);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.secondary-btn:hover {
+  background: var(--border);
 }
 
 .controls-group h3 {

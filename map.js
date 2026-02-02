@@ -119,6 +119,8 @@
 
   function createDeviceStyle(feature, selected) {
     const dev = feature.get('device');
+    if (!dev) return null;
+
     const isOffline = dev.source === 'uisp'
       ? (dev.state === 'disconnected')
       : (dev.state === 0);
@@ -136,7 +138,7 @@
       shape = 'triangle';
     }
 
-    return new ol.style.Style({
+    const mainStyle = new ol.style.Style({
       image: shape === 'square'
         ? new ol.style.RegularShape({
             fill: new ol.style.Fill({ color: fill }),
@@ -159,6 +161,22 @@
             radius: radius,
           }),
     });
+
+    if (selected) {
+      return [
+        new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: radius + 8,
+            stroke: new ol.style.Stroke({
+              color: 'rgba(78, 205, 196, 0.8)',
+              width: 3,
+            }),
+          }),
+        }),
+        mainStyle
+      ];
+    }
+    return mainStyle;
   }
 
   function createLinkStyle(feature, selected) {
@@ -297,6 +315,22 @@
     document.getElementById('inspector-close').addEventListener('click', () => {
       selectFeature(null);
     });
+
+    // Device List Toggle
+    document.getElementById('toggle-device-list').addEventListener('click', (e) => {
+      const container = document.getElementById('device-list-container');
+      const btn = e.target;
+      container.classList.toggle('hidden');
+      btn.classList.toggle('collapsed');
+    });
+
+    // Device Search
+    document.getElementById('device-search').addEventListener('input', (e) => {
+      renderDeviceList(e.target.value);
+    });
+
+    // Export Positions
+    document.getElementById('export-positions-btn').addEventListener('click', exportPositionLookup);
   }
 
   function selectFeature(feature) {
@@ -304,6 +338,21 @@
     deviceLayer.changed();
     linkLayer.changed();
     showInspector(feature);
+    highlightListItem(feature);
+  }
+
+  function highlightListItem(feature) {
+    const items = document.querySelectorAll('.device-item');
+    items.forEach(item => item.classList.remove('selected'));
+
+    if (feature && feature.get('device')) {
+      const dev = feature.get('device');
+      const item = document.querySelector(`.device-item[data-id="${dev.id}"]`);
+      if (item) {
+        item.classList.add('selected');
+        item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
   }
 
   function showInspector(feature) {
@@ -453,6 +502,81 @@
         }
       }
     }
+    renderDeviceList();
+  }
+
+  function renderDeviceList(searchQuery = '') {
+    const list = document.getElementById('device-list');
+    list.innerHTML = '';
+
+    const query = searchQuery.toLowerCase();
+    const allDevices = [];
+    
+    deviceFeatures.forEach((feature) => {
+      const dev = feature.get('device');
+      if (!dev) return;
+      if (query && !dev.name.toLowerCase().includes(query) && !dev.model.toLowerCase().includes(query) && !dev.id.toLowerCase().includes(query)) return;
+      allDevices.push({ dev, feature });
+    });
+
+    allDevices.sort((a, b) => (a.dev.name || '').localeCompare(b.dev.name || ''));
+
+    allDevices.forEach(({ dev, feature }) => {
+      const item = document.createElement('div');
+      item.className = 'device-item';
+      if (selectedFeature === feature) item.classList.add('selected');
+      item.dataset.id = dev.id;
+
+      const isOffline = dev.source === 'uisp' ? (dev.state === 'disconnected') : (dev.state === 0);
+      
+      item.innerHTML = `
+        <span class="device-name" title="${escapeHtml(dev.name)} [${dev.model}]">${escapeHtml(dev.name)}</span>
+        <span class="device-status ${isOffline ? 'offline' : 'online'}"></span>
+      `;
+
+      item.addEventListener('click', () => {
+        selectFeature(feature);
+        const geom = feature.getGeometry();
+        map.getView().animate({
+          center: geom.getCoordinates(),
+          zoom: 18,
+          duration: 500
+        });
+      });
+
+      list.appendChild(item);
+    });
+  }
+
+  function exportPositionLookup() {
+    const overrides = loadPositionOverrides();
+    const comment = "Manually measured lat/lon for UniFi access points. Add entries as you measure devices. MAC address (id) is the key. Include name for human readability.";
+    const output = {
+      "_comment": comment
+    };
+
+    // Merge current overrides with existing data names if possible
+    for (const [id, pos] of Object.entries(overrides)) {
+      const dev = getDeviceById(id);
+      output[id] = {
+        name: dev?.name || `Device ${id}`,
+        lat: pos.lat,
+        lon: pos.lon
+      };
+    }
+
+    const json = JSON.stringify(output, null, 2);
+    
+    // Create a blob and download it
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'unifi_position_lookup.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    alert('Positions exported! Replace unifi_position_lookup.json with this file to persist changes.');
   }
 
   function renderLinks() {
