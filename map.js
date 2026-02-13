@@ -319,16 +319,18 @@
       map.getTargetElement().style.cursor = hit ? 'pointer' : '';
     });
 
-    // Layer & Filter Listeners
+    // Base layer: Streets или Satellite
     document.querySelectorAll('input[name="base-layer"]').forEach(radio => {
       radio.addEventListener('change', (e) => {
         const layerType = e.target.value;
         streetLayer.setVisible(layerType === 'osm');
         satelliteLayer.setVisible(layerType === 'satellite');
-        if (droneLayer) {
-          droneLayer.setVisible(layerType === 'drone');
-        }
       });
+    });
+
+    // Дрон-фото — наложение поверх выбранной базы (спутник или схема)
+    document.getElementById('layer-drone-overlay').addEventListener('change', (e) => {
+      if (droneLayer) droneLayer.setVisible(e.target.checked);
     });
 
     document.getElementById('layer-uisp').addEventListener('change', (e) => {
