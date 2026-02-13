@@ -46,6 +46,7 @@
   let clientLayer;
   let streetLayer;
   let satelliteLayer;
+  let droneLayer = null;
   let networkData = null;
   let deviceFeatures = new Map();
   let linkFeatures = new Map();
@@ -81,7 +82,7 @@
   function resolveDevicePosition(dev, source, centroid) {
     const coords = getDeviceCoords(dev, source);
     if (coords) return coords;
-    if (source === 'unifi' && centroid) return centroid;
+    if (centroid) return centroid; // Позволяем UISP тоже падать в центроид
     return null;
   }
 
@@ -109,11 +110,33 @@
   function getLinkEndpoints(link) {
     const fromDev = getDeviceById(link.from);
     const toDev = getDeviceById(link.to);
-    const centroid = computeCentroid(networkData?.uisp || []);
     if (!fromDev || !toDev) return null;
-    const fromPos = resolveDevicePosition(fromDev, fromDev.source, centroid);
-    const toPos = resolveDevicePosition(toDev, toDev.source, centroid);
-    if (!fromPos || !toPos) return null;
+
+    const fromFeature = deviceFeatures.get(link.from);
+    const toFeature = deviceFeatures.get(link.to);
+    
+    const centroid = computeCentroid(networkData?.uisp || []);
+
+    let fromPos, toPos;
+
+    if (fromFeature) {
+      const coord = ol.proj.toLonLat(fromFeature.getGeometry().getCoordinates());
+      fromPos = { lon: coord[0], lat: coord[1] };
+    } else {
+      fromPos = resolveDevicePosition(fromDev, fromDev.source, centroid);
+    }
+
+    if (toFeature) {
+      const coord = ol.proj.toLonLat(toFeature.getGeometry().getCoordinates());
+      toPos = { lon: coord[0], lat: coord[1] };
+    } else {
+      toPos = resolveDevicePosition(toDev, toDev.source, centroid);
+    }
+
+    if (!fromPos || !toPos || isNaN(fromPos.lat) || isNaN(fromPos.lon) || isNaN(toPos.lat) || isNaN(toPos.lon)) {
+      return null;
+    }
+
     return { from: fromPos, to: toPos };
   }
 
@@ -215,10 +238,44 @@
       maxZoom: 22, // Allow OpenLayers to upscale the tiles
     });
 
+    // Слой с дрон-фото (GeoTIFF из OpenDroneMap)
+    const DRONE_GEOTIFF_URL = 'odm/odm_orthophoto_reduced.tif';
+    const DRONE_EXTENT = [-115.7358263, 33.3457243, -115.7107067, 33.3647887];
+    
+    try {
+      if (typeof ol.source.GeoTIFF !== 'undefined' && typeof ol.layer.WebGLTile !== 'undefined') {
+        const droneSource = new ol.source.GeoTIFF({
+          sources: [{ url: DRONE_GEOTIFF_URL, normalize: false }],
+          wrapX: false,
+        });
+        // RGB GeoTIFF нужно рендерить через WebGLTile (обычный Tile не поддерживает array data)
+        droneLayer = new ol.layer.WebGLTile({
+          source: droneSource,
+          opacity: 0.85,
+          visible: false,
+          zIndex: 1,
+        });
+        droneSource.on('tileloaderror', function () {
+          console.warn('⚠ Ошибка загрузки тайла GeoTIFF. Проверьте файл odm/odm_orthophoto_reduced.tif и сервер.');
+        });
+        console.log('✓ GeoTIFF слой создан (WebGL). Включите слой "Drone Photo" в меню.');
+      } else {
+        throw new Error('ol.source.GeoTIFF или ol.layer.WebGLTile не определен');
+      }
+    } catch (error) {
+      console.error('❌ Не удалось создать GeoTIFF слой:', error);
+      droneLayer = null;
+    }
+
     deviceLayer = new ol.layer.Vector({
       source: new ol.source.Vector(),
       style: (feature) => createDeviceStyle(feature, feature === selectedFeature),
       zIndex: 10,
+    });
+
+    // Добавляем «живое» обновление линков при перетаскивании
+    deviceLayer.getSource().on('changefeature', () => {
+      if (adminMode) renderLinks();
     });
 
     linkLayer = new ol.layer.Vector({
@@ -241,7 +298,7 @@
 
     map = new ol.Map({
       target: 'map',
-      layers: [streetLayer, satelliteLayer, linkLayer, clientLayer, deviceLayer],
+      layers: [streetLayer, satelliteLayer, droneLayer, linkLayer, clientLayer, deviceLayer].filter(l => l !== null),
       view: new ol.View({
         center: ol.proj.fromLonLat([-115.73, 33.35]),
         zoom: 14,
@@ -265,9 +322,12 @@
     // Layer & Filter Listeners
     document.querySelectorAll('input[name="base-layer"]').forEach(radio => {
       radio.addEventListener('change', (e) => {
-        const isSat = e.target.value === 'satellite';
-        streetLayer.setVisible(!isSat);
-        satelliteLayer.setVisible(isSat);
+        const layerType = e.target.value;
+        streetLayer.setVisible(layerType === 'osm');
+        satelliteLayer.setVisible(layerType === 'satellite');
+        if (droneLayer) {
+          droneLayer.setVisible(layerType === 'drone');
+        }
       });
     });
 
@@ -475,7 +535,7 @@
         const isOffline = dev.state === 'disconnected';
         if (filters.onlineOnly && isOffline) continue;
 
-        const pos = resolveDevicePosition(dev, 'uisp', null);
+        const pos = resolveDevicePosition(dev, 'uisp', centroid);
         if (!pos) continue;
         const feature = new ol.Feature({
           geometry: new ol.geom.Point(ol.proj.fromLonLat([pos.lon, pos.lat])),
@@ -624,14 +684,14 @@
 
     modifyInteraction = new ol.interaction.Modify({
       source: deviceLayer.getSource(),
-      filter: (f) => f.get('device')?.source === 'unifi',
+      filter: (f) => !!f.get('device'),
     });
     map.addInteraction(modifyInteraction);
 
     modifyInteraction.on('modifyend', (e) => {
       e.features.forEach((f) => {
         const dev = f.get('device');
-        if (dev?.source !== 'unifi') return;
+        if (!dev) return;
         const coord = f.getGeometry().getCoordinates();
         const lonlat = ol.proj.toLonLat(coord);
         savePositionOverride(dev.id, lonlat[1], lonlat[0]);
