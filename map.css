@@ -235,6 +235,18 @@ body {
   gap: 0.25rem;
 }
 
+.layer-overlay {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+.layer-overlay-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 1.5rem;
+}
+
 .filter-range {
   margin-top: 0.5rem;
 }
@@ -348,6 +360,131 @@ body {
 
 .inspector-content .state-offline {
   color: var(--offline);
+}
+
+/* Client list in inspector */
+.clients-section {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.clients-header {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.clients-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0;
+  font-style: italic;
+}
+
+.client-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.client-item {
+  background: var(--bg-dark);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+}
+
+.client-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  word-break: break-all;
+}
+
+.client-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  background: rgba(78, 205, 196, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(78, 205, 196, 0.25);
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+  white-space: nowrap;
+}
+
+.tag-signal {
+  background: rgba(255, 165, 0, 0.12);
+  color: #f0a500;
+  border-color: rgba(255, 165, 0, 0.3);
+}
+
+.tag-wired {
+  background: rgba(150, 150, 255, 0.12);
+  color: #9999ff;
+  border-color: rgba(150, 150, 255, 0.3);
+}
+
+.client-traffic {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.timeline-panel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  border-top: 1px solid var(--border);
+  background: rgba(20, 23, 29, 0.96);
+}
+
+.timeline-btn {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-hover);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.timeline-btn:hover {
+  background: #3a404d;
+}
+
+.timeline-speed {
+  min-width: 58px;
+  background: var(--bg-dark);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.25rem 0.3rem;
+}
+
+.timeline-slider {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.timeline-ts {
+  min-width: 165px;
+  text-align: right;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 /* OpenLayers overrides */

@@ -8,6 +8,21 @@
 
   const STORAGE_KEY = 'bombay-mars-device-positions';
   const DATA_URL = 'network_data.json';
+  const TIMELINE_URL = 'history/timeline_24h.json';
+
+  const PALETTE = {
+    unifi_ap:     '#4ecdc4',  // teal  – UniFi access point
+    unifi_sw:     '#5b9cf6',  // blue  – UniFi switch
+    unifi_gw:     '#a78bfa',  // purple – UniFi gateway / UDM
+    uisp:         '#ff8c42',  // orange – all UISP devices
+    offline:      '#4b5563',  // dark grey – any offline device
+    link_wireless:'#34a853',  // green baseline (overridden by signal)
+    link_wired:   '#5b9cf6',  // blue – wired UniFi
+    link_uisp:    '#ff8c42',  // orange – UISP wireless
+    flow_tx:      '#4ecdc4',  // teal dots – tx (upload)
+    flow_rx:      '#ff8c42',  // orange dots – rx (download)
+    client_wired: '#a78bfa',  // lavender – wired clients
+  };
 
   // Device model thumbnails (Ubiquiti product images or placeholder)
   const MODEL_IMAGES = {
@@ -44,23 +59,39 @@
   let deviceLayer;
   let linkLayer;
   let clientLayer;
+  let clientLinkLayer;
   let streetLayer;
   let satelliteLayer;
   let droneLayer = null;
   let networkData = null;
   let deviceFeatures = new Map();
   let linkFeatures = new Map();
+  let clientFeatures = new Map(); // mac -> {dot: Feature, link: Feature, apId: string}
   let selectedFeature = null;
   let adminMode = false;
+  let baseNetworkData = null;
+  let timelineFrames = [];
+  let timelinePlaying = false;
+  let timelineTimer = null;
+  let timelineFrameIdx = 0;
 
   const filters = {
     showUisp: true,
     showUnifi: true,
     showWireless: true,
     showWired: true,
+    showClients: true,
     onlineOnly: false,
     minSignal: -90
   };
+
+  function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  function linkKey(link) {
+    return `${link.from}::${link.to}::${link.type || ''}`;
+  }
 
   function getDeviceCoords(dev, source) {
     const overrides = loadPositionOverrides();
@@ -145,79 +176,252 @@
     if (!dev) return null;
 
     const isOffline = dev.source === 'uisp'
-      ? (dev.state === 'disconnected')
-      : (dev.state === 0);
-    const type = dev.type || 'uap';
-    let fill = selected ? '#4ecdc4' : (isOffline ? '#5f6368' : '#4ecdc4');
-    let stroke = selected ? '#fff' : (isOffline ? '#3c4043' : '#3ba89f');
-    let radius = 6;
-    let shape = 'circle';
+      ? dev.state === 'disconnected'
+      : dev.state === 0;
 
-    if (type === 'usw') {
-      radius = 7;
-      shape = 'square';
-    } else if (type === 'airMax') {
-      radius = 8;
-      shape = 'triangle';
+    const type = (dev.type || 'uap').toLowerCase();
+    const source = dev.source;
+
+    // Pick fill color
+    let fill;
+    if (isOffline) {
+      fill = PALETTE.offline;
+    } else if (source === 'uisp') {
+      fill = PALETTE.uisp;
+    } else if (type === 'usw') {
+      fill = PALETTE.unifi_sw;
+    } else if (type === 'ugw' || type === 'udm') {
+      fill = PALETTE.unifi_gw;
+    } else {
+      fill = PALETTE.unifi_ap;
     }
 
-    const mainStyle = new ol.style.Style({
-      image: shape === 'square'
-        ? new ol.style.RegularShape({
-            fill: new ol.style.Fill({ color: fill }),
-            stroke: new ol.style.Stroke({ color: stroke, width: 2 }),
-            points: 4,
-            angle: Math.PI / 4,
-            radius: radius,
-          })
-        : shape === 'triangle'
-        ? new ol.style.RegularShape({
-            fill: new ol.style.Fill({ color: fill }),
-            stroke: new ol.style.Stroke({ color: stroke, width: 2 }),
-            points: 3,
-            angle: 0,
-            radius: radius,
-          })
-        : new ol.style.Circle({
-            fill: new ol.style.Fill({ color: fill }),
-            stroke: new ol.style.Stroke({ color: stroke, width: 2 }),
-            radius: radius,
-          }),
-    });
+    const strokeColor = selected ? '#ffffff' : (isOffline ? '#374151' : 'rgba(0,0,0,0.45)');
+    const strokeWidth = selected ? 2.5 : 1.5;
 
+    // Shape: circle=UniFi AP, square=Switch, triangle=UISP
+    let imageStyle;
+    if (type === 'usw') {
+      imageStyle = new ol.style.RegularShape({
+        fill: new ol.style.Fill({ color: fill }),
+        stroke: new ol.style.Stroke({ color: strokeColor, width: strokeWidth }),
+        points: 4,
+        radius: selected ? 10 : 8,
+        angle: Math.PI / 4,
+      });
+    } else if (source === 'uisp') {
+      imageStyle = new ol.style.RegularShape({
+        fill: new ol.style.Fill({ color: fill }),
+        stroke: new ol.style.Stroke({ color: strokeColor, width: strokeWidth }),
+        points: 3,
+        radius: selected ? 12 : 10,
+        angle: 0,
+      });
+    } else if (type === 'ugw' || type === 'udm') {
+      // Pentagon for gateway
+      imageStyle = new ol.style.RegularShape({
+        fill: new ol.style.Fill({ color: fill }),
+        stroke: new ol.style.Stroke({ color: strokeColor, width: strokeWidth }),
+        points: 5,
+        radius: selected ? 11 : 9,
+        angle: -Math.PI / 2,
+      });
+    } else {
+      // Circle for AP
+      imageStyle = new ol.style.Circle({
+        fill: new ol.style.Fill({ color: fill }),
+        stroke: new ol.style.Stroke({ color: strokeColor, width: strokeWidth }),
+        radius: selected ? 9 : 7,
+      });
+    }
+
+    const styles = [new ol.style.Style({ image: imageStyle })];
+
+    // Glow ring when selected
     if (selected) {
-      return [
+      styles.unshift(
         new ol.style.Style({
           image: new ol.style.Circle({
-            radius: radius + 8,
-            stroke: new ol.style.Stroke({
-              color: 'rgba(78, 205, 196, 0.8)',
-              width: 3,
-            }),
+            radius: 20,
+            stroke: new ol.style.Stroke({ color: fill + '55', width: 6 }),
           }),
         }),
-        mainStyle
-      ];
+        new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 14,
+            stroke: new ol.style.Stroke({ color: fill + 'aa', width: 3 }),
+          }),
+        })
+      );
     }
-    return mainStyle;
+
+    return styles;
+  }
+
+  function createClientStyle(feature, selected) {
+    const client = feature.get('client');
+    const dbm = client?.signal ?? client?.rssi ?? null;
+    const isWired = !client?.radio;
+    const color = isWired ? PALETTE.client_wired : signalColor(dbm);
+    const r = selected ? 6 : 4;
+
+    const styles = [];
+    if (selected) {
+      styles.push(new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: r + 7,
+          stroke: new ol.style.Stroke({ color: color + '55', width: 4 }),
+        }),
+      }));
+      styles.push(new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: r + 3,
+          stroke: new ol.style.Stroke({ color: color + 'aa', width: 2 }),
+        }),
+      }));
+    }
+    styles.push(new ol.style.Style({
+      image: new ol.style.Circle({
+        radius: r,
+        fill: new ol.style.Fill({ color }),
+        stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.5)', width: 1.5 }),
+      }),
+    }));
+    return styles;
+  }
+
+  function createClientLinkStyle() {
+    return new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: 'rgba(160,160,180,0.22)',
+        width: 1,
+        lineDash: [2, 6],
+      }),
+    });
   }
 
   function createLinkStyle(feature, selected) {
     const link = feature.get('link');
-    const color = link.type === 'wireless' && link.signal != null
-      ? signalColor(link.signal)
-      : '#9aa0a6';
-    const width = link.type === 'wireless' && link.signal != null
-      ? signalWidth(link.signal)
-      : 2;
-    const opacity = selected ? 1 : 0.85;
+    const type = link.type || 'wireless';
 
+    let color, width, lineDash;
+
+    if (type === 'wired_unifi') {
+      color = selected ? '#7fb3f8' : PALETTE.link_wired + (selected ? '' : 'bb');
+      width = selected ? 2.5 : 1.5;
+      lineDash = [5, 6];
+    } else if (type === 'wireless') {
+      // UISP wireless or UniFi wireless – color by signal
+      const fromDev = getDeviceById(link.from);
+      const isUisp = fromDev?.source === 'uisp' || link.source === 'uisp';
+      if (isUisp) {
+        color = link.signal != null ? signalColor(link.signal) : PALETTE.link_uisp;
+      } else {
+        color = link.signal != null ? signalColor(link.signal) : PALETTE.link_wireless;
+      }
+      width = selected ? signalWidth(link.signal) + 2 : signalWidth(link.signal);
+      lineDash = [];
+    } else {
+      color = '#9aa0a6';
+      width = selected ? 3 : 2;
+      lineDash = [];
+    }
+
+    const styles = [new ol.style.Style({
+      stroke: new ol.style.Stroke({ color, width, lineDash }),
+    })];
+
+    // Selection highlight — bright outer stroke
+    if (selected) {
+      styles.unshift(new ol.style.Style({
+        stroke: new ol.style.Stroke({ color: color + '44', width: width + 6 }),
+      }));
+    }
+
+    return styles;
+  }
+
+  // === Traffic flow animation — draw in map coords directly on link layer ===
+
+  function makeFlowDotStyle(color, radius) {
     return new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: color,
-        width: selected ? width + 2 : width,
-        lineDash: link.type === 'wired_unifi' ? [4, 4] : [],
+      image: new ol.style.Circle({
+        radius,
+        fill: new ol.style.Fill({ color }),
+        stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.35)', width: 1 }),
       }),
+    });
+  }
+
+  function drawFlowOnGeometry(vectorContext, geometry, seconds, bytes, color, reverse) {
+    const length = geometry.getLength();
+    if (!length || length < 1) return;
+
+    // Log scale: 1 MB (~1e6) -> 0, 100 GB (~1e11) -> 1
+    const strength = Math.max(0, Math.min(1, (Math.log10(Math.max(1, bytes)) - 6) / 5));
+    if (strength < 0.02) return;
+
+    const numDots = 1 + Math.floor(strength * 3);      // 1-4 dots
+    const cyclesPerSec = 0.06 + strength * 0.22;       // 0.06..0.28 loops/sec
+    const radius = 2 + strength * 1.6;                 // 2..3.6 px
+    const style = makeFlowDotStyle(color, radius);
+
+    vectorContext.setStyle(style);
+    for (let i = 0; i < numDots; i++) {
+      const progress = (seconds * cyclesPerSec + i / numDots) % 1;
+      const frac = reverse ? (1 - progress) : progress;
+      const coord = geometry.getCoordinateAt(frac);
+      vectorContext.drawGeometry(new ol.geom.Point(coord));
+    }
+  }
+
+  function startAnimation() {
+    linkLayer.on('postrender', function (event) {
+      if (!networkData) return;
+      const vectorContext = ol.render.getVectorContext(event);
+      const seconds = event.frameState.time / 1000;
+
+      linkFeatures.forEach((feature) => {
+        const link = feature.get('link');
+        const geometry = feature.getGeometry();
+        if (!link || !geometry) return;
+
+        const fromDev = getDeviceById(link.from);
+        const toDev = getDeviceById(link.to);
+        const isWireless = link.type === 'wireless';
+        let txBytes = fromDev?.tx_bytes || 0;
+        let rxBytes = toDev?.tx_bytes || 0;
+
+        // UISP links often don't provide tx/rx bytes in current payload.
+        // Fallback to synthetic intensity based on signal + clients so animation is visible on yellow/green links.
+        if (isWireless && txBytes === 0 && rxBytes === 0) {
+          const signal = typeof link.signal === 'number' ? link.signal : -65;
+          const quality = Math.max(0, Math.min(1, (signal + 90) / 50)); // -90..-40 => 0..1
+          const clients = (fromDev?.clients || 0) + (toDev?.clients || 0);
+          const clientBoost = Math.log10(clients + 1) * 2.0e9;
+          const pseudo = 2.5e8 + quality * 7.5e9 + clientBoost;
+          txBytes = pseudo;
+          rxBytes = pseudo * 0.85;
+        }
+
+        // For wireless links, use link color (green/yellow/red) to match the line.
+        const wirelessColor = signalColor(
+          typeof link.signal === 'number' ? link.signal : -65
+        );
+        const txColor = isWireless ? wirelessColor : PALETTE.flow_tx;
+        const rxColor = isWireless ? wirelessColor : PALETTE.flow_rx;
+
+        // TX (upload): source -> destination
+        if (txBytes > 0) {
+          drawFlowOnGeometry(vectorContext, geometry, seconds, txBytes, txColor, false);
+        }
+        // RX (download): destination -> source
+        if (rxBytes > 0) {
+          drawFlowOnGeometry(vectorContext, geometry, seconds, rxBytes, rxColor, true);
+        }
+      });
+
+      map.render();
     });
   }
 
@@ -273,9 +477,27 @@
       zIndex: 10,
     });
 
-    // Добавляем «живое» обновление линков при перетаскивании
-    deviceLayer.getSource().on('changefeature', () => {
-      if (adminMode) renderLinks();
+    // Живое обновление линков и клиентов при перетаскивании
+    deviceLayer.getSource().on('changefeature', (e) => {
+      if (!adminMode) return;
+      renderLinks();
+      // Перемещаем клиентов вслед за их AP
+      const movedDev = e.feature?.get('device');
+      if (movedDev) {
+        const newCoord = e.feature.getGeometry().getCoordinates();
+        clientFeatures.forEach((entry) => {
+          if (entry.apId !== movedDev.id) return;
+          // Найти индекс этого клиента среди клиентов AP
+          const apDev = e.feature.get('device');
+          const clients = apDev?.client_list || [];
+          const allEntries = [...clientFeatures.values()].filter(en => en.apId === movedDev.id);
+          const idx = allEntries.indexOf(entry);
+          const total = allEntries.length;
+          const newClientCoord = clientRingCoord(newCoord, idx, total);
+          entry.dot.getGeometry().setCoordinates(newClientCoord);
+          entry.link.getGeometry().setCoordinates([newCoord, newClientCoord]);
+        });
+      }
     });
 
     linkLayer = new ol.layer.Vector({
@@ -284,21 +506,21 @@
       zIndex: 5,
     });
 
+    clientLinkLayer = new ol.layer.Vector({
+      source: new ol.source.Vector(),
+      style: createClientLinkStyle,
+      zIndex: 6,
+    });
+
     clientLayer = new ol.layer.Vector({
       source: new ol.source.Vector(),
-      style: new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 2,
-          fill: new ol.style.Fill({ color: '#ffffff' }),
-          stroke: new ol.style.Stroke({ color: '#4ecdc4', width: 1 }),
-        }),
-      }),
+      style: (feature) => createClientStyle(feature, feature === selectedFeature),
       zIndex: 8,
     });
 
     map = new ol.Map({
       target: 'map',
-      layers: [streetLayer, satelliteLayer, droneLayer, linkLayer, clientLayer, deviceLayer].filter(l => l !== null),
+      layers: [streetLayer, satelliteLayer, droneLayer, linkLayer, clientLinkLayer, clientLayer, deviceLayer].filter(l => l !== null),
       view: new ol.View({
         center: ol.proj.fromLonLat([-115.73, 33.35]),
         zoom: 14,
@@ -307,15 +529,17 @@
       }),
     });
 
+    startAnimation();
+
     map.on('click', (e) => {
       map.forEachFeatureAtPixel(e.pixel, (f) => {
         selectFeature(f);
         return true;
-      }, { layerFilter: (l) => l === deviceLayer || l === linkLayer });
+      }, { layerFilter: (l) => l === deviceLayer || l === linkLayer || l === clientLayer });
     });
 
     map.on('pointermove', (e) => {
-      const hit = map.hasFeatureAtPixel(e.pixel, { layerFilter: (l) => l === deviceLayer || l === linkLayer });
+      const hit = map.hasFeatureAtPixel(e.pixel, { layerFilter: (l) => l === deviceLayer || l === linkLayer || l === clientLayer });
       map.getTargetElement().style.cursor = hit ? 'pointer' : '';
     });
 
@@ -330,7 +554,12 @@
 
     // Дрон-фото — наложение поверх выбранной базы (спутник или схема)
     document.getElementById('layer-drone-overlay').addEventListener('change', (e) => {
-      if (droneLayer) droneLayer.setVisible(e.target.checked);
+      if (droneLayer) {
+        droneLayer.setVisible(e.target.checked);
+      } else if (e.target.checked) {
+        console.warn('Слой Drone photo не загружен. Откройте в режиме инкогнито или проверьте: сервер запущен из папки проекта, файл odm/odm_orthophoto_reduced.tif существует.');
+        e.target.checked = false;
+      }
     });
 
     document.getElementById('layer-uisp').addEventListener('change', (e) => {
@@ -353,6 +582,24 @@
     document.getElementById('layer-wired').addEventListener('change', (e) => {
       filters.showWired = e.target.checked;
       renderLinks();
+    });
+
+    document.getElementById('layer-clients').addEventListener('change', (e) => {
+      filters.showClients = e.target.checked;
+      // Re-render all client dots and links
+      const clientSource = clientLayer.getSource();
+      const clientLinkSource = clientLinkLayer.getSource();
+      clientSource.clear();
+      clientLinkSource.clear();
+      clientFeatures.clear();
+      if (filters.showClients) {
+        deviceFeatures.forEach((feature, apId) => {
+          const dev = feature.get('device');
+          if (dev?.client_list?.length) {
+            renderClients(apId, feature.getGeometry().getCoordinates());
+          }
+        });
+      }
     });
 
     document.getElementById('filter-online-only').addEventListener('change', (e) => {
@@ -393,12 +640,16 @@
 
     // Export Positions
     document.getElementById('export-positions-btn').addEventListener('click', exportPositionLookup);
+
+    // Bottom timeline controls
+    bindTimelineUi();
   }
 
   function selectFeature(feature) {
     selectedFeature = feature;
     deviceLayer.changed();
     linkLayer.changed();
+    clientLayer.changed();
     showInspector(feature);
     highlightListItem(feature);
   }
@@ -430,6 +681,46 @@
     panel.classList.remove('hidden');
     const dev = feature.get('device');
     const link = feature.get('link');
+    const client = feature.get('client');
+
+    if (client) {
+      title.textContent = 'Client';
+      const isWired = !client.radio;
+      const dbm = client.signal ?? client.rssi ?? null;
+      const signalDot = dbm != null
+        ? `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${signalColor(dbm)};margin-right:4px;vertical-align:middle;"></span>`
+        : '';
+
+      function fmtBytesC(b) {
+        if (b == null) return null;
+        if (b >= 1e9) return (b / 1e9).toFixed(2) + ' GB';
+        if (b >= 1e6) return (b / 1e6).toFixed(1) + ' MB';
+        if (b >= 1e3) return (b / 1e3).toFixed(1) + ' KB';
+        return b + ' B';
+      }
+      function fmtUptimeC(s) {
+        if (s == null) return null;
+        const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
+        return [d && `${d}d`, h && `${h}h`, m && `${m}m`].filter(Boolean).join(' ') || '<1m';
+      }
+      const apFeature = deviceFeatures.get(client.apId);
+      const apName = apFeature?.get('device')?.name || client.apId || '-';
+
+      content.innerHTML = `
+        <div class="device-thumb">${isWired ? '🔌' : '📶'}</div>
+        <dl>
+          <dt>Name</dt><dd>${escapeHtml(client.name || client.mac || '?')}</dd>
+          <dt>MAC</dt><dd style="font-family:monospace;font-size:0.8rem">${escapeHtml(client.mac || '-')}</dd>
+          ${client.ip ? `<dt>IP</dt><dd>${escapeHtml(client.ip)}</dd>` : ''}
+          <dt>Connection</dt><dd>${isWired ? '<span class="tag tag-wired">Wired</span>' : `<span class="tag">${escapeHtml(client.radio?.toUpperCase() || 'WiFi')}</span>${client.channel ? ` <span class="tag">ch${client.channel}</span>` : ''}`}</dd>
+          ${dbm != null ? `<dt>Signal</dt><dd>${signalDot}${dbm} dBm</dd>` : ''}
+          ${client.uptime != null ? `<dt>Uptime</dt><dd>${fmtUptimeC(client.uptime)}</dd>` : ''}
+          ${(client.tx_bytes != null || client.rx_bytes != null) ? `<dt>Traffic</dt><dd>↑${fmtBytesC(client.tx_bytes) || '?'} ↓${fmtBytesC(client.rx_bytes) || '?'}</dd>` : ''}
+          <dt>Access Point</dt><dd>${escapeHtml(apName)}</dd>
+        </dl>
+      `;
+      return;
+    }
 
     if (dev) {
       title.textContent = 'Device';
@@ -437,16 +728,62 @@
       const thumbHtml = imgUrl
         ? `<div class="device-thumb"><img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(dev.model || '')}" onerror="this.parentElement.innerHTML='📡'"></div>`
         : `<div class="device-thumb">📡</div>`;
+
+      const isOnline = dev.source === 'uisp' ? dev.state === 'active' : dev.state === 1;
+      const stateLabel = dev.source === 'uisp' ? dev.state : (dev.state === 1 ? 'Online' : 'Offline');
+
+      function fmtBytes(b) {
+        if (b == null) return null;
+        if (b >= 1e9) return (b / 1e9).toFixed(2) + ' GB';
+        if (b >= 1e6) return (b / 1e6).toFixed(1) + ' MB';
+        if (b >= 1e3) return (b / 1e3).toFixed(1) + ' KB';
+        return b + ' B';
+      }
+      function fmtUptime(s) {
+        if (s == null) return null;
+        const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
+        return [d && `${d}d`, h && `${h}h`, m && `${m}m`].filter(Boolean).join(' ') || '<1m';
+      }
+
+      const clients = dev.client_list || [];
+      // client_list присутствует только у UniFi-устройств; UISP — только счётчик RF-клиентов
+      const hasClientData = Array.isArray(dev.client_list);
+      const clientsHtml = clients.length > 0 ? `
+        <div class="clients-section">
+          <div class="clients-header">Clients (${clients.length})</div>
+          <ul class="client-list">
+            ${clients.map(c => `
+              <li class="client-item">
+                <div class="client-name">${escapeHtml(c.name || c.mac || '?')}</div>
+                <div class="client-meta">
+                  ${c.ip ? `<span class="tag">${escapeHtml(c.ip)}</span>` : ''}
+                  ${c.radio ? `<span class="tag">${escapeHtml(c.radio.toUpperCase())}</span>` : '<span class="tag tag-wired">Wired</span>'}
+                  ${c.channel ? `<span class="tag">ch${c.channel}</span>` : ''}
+                  ${c.signal != null ? `<span class="tag tag-signal">${c.signal} dBm</span>` : c.rssi != null ? `<span class="tag tag-signal">RSSI ${c.rssi}</span>` : ''}
+                  ${c.uptime != null ? `<span class="tag">${fmtUptime(c.uptime)}</span>` : ''}
+                </div>
+                ${(c.tx_bytes != null || c.rx_bytes != null) ? `<div class="client-traffic">↑${fmtBytes(c.tx_bytes) || '?'} ↓${fmtBytes(c.rx_bytes) || '?'}</div>` : ''}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      ` : (hasClientData && dev.clients > 0 ? `<div class="clients-section"><div class="clients-header">Clients (${dev.clients})</div><p class="clients-hint">Run script to load details</p></div>` : '');
+
       content.innerHTML = `
         ${thumbHtml}
         <dl>
           <dt>Name</dt><dd>${escapeHtml(dev.name || '-')}</dd>
           <dt>Model</dt><dd>${escapeHtml(dev.model || '-')}</dd>
           <dt>Type</dt><dd>${dev.type || '-'}</dd>
-          <dt>State</dt><dd class="${dev.source === 'uisp' ? (dev.state === 'active' ? 'state-online' : 'state-offline') : (dev.state === 1 ? 'state-online' : 'state-offline')}">${dev.source === 'uisp' ? dev.state : (dev.state === 1 ? 'Online' : 'Offline')}</dd>
+          <dt>State</dt><dd class="${isOnline ? 'state-online' : 'state-offline'}">${stateLabel}</dd>
+          ${dev.ip ? `<dt>IP</dt><dd>${escapeHtml(dev.ip)}</dd>` : ''}
+          ${dev.version ? `<dt>Firmware</dt><dd>${escapeHtml(dev.version)}</dd>` : ''}
+          ${dev.uptime != null ? `<dt>Uptime</dt><dd>${fmtUptime(dev.uptime)}</dd>` : ''}
+          ${(dev.tx_bytes != null || dev.rx_bytes != null) ? `<dt>Traffic</dt><dd>↑${fmtBytes(dev.tx_bytes) || '?'} ↓${fmtBytes(dev.rx_bytes) || '?'}</dd>` : ''}
           ${dev.clients != null ? `<dt>Clients</dt><dd>${dev.clients}</dd>` : ''}
           <dt>Coordinates</dt><dd>${(dev.lat != null && dev.lon != null) ? `${dev.lat.toFixed(5)}, ${dev.lon.toFixed(5)}` : '-'}</dd>
         </dl>
+        ${clientsHtml}
       `;
     } else if (link) {
       title.textContent = 'Link';
@@ -470,13 +807,67 @@
     return div.innerHTML;
   }
 
+  // Place clients in a deterministic ring around their AP/switch
+  function clientRingCoord(apProjCoord, index, total) {
+    const angle = (index / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2;
+    const radius = 22 + (total > 8 ? 8 : 0); // slightly larger ring for crowded APs
+    return [
+      apProjCoord[0] + Math.cos(angle) * radius,
+      apProjCoord[1] + Math.sin(angle) * radius,
+    ];
+  }
+
+  function renderClients(apId, apProjCoord) {
+    const clientSource = clientLayer.getSource();
+    const clientLinkSource = clientLinkLayer.getSource();
+
+    // Remove old features for this AP
+    const toRemove = [];
+    clientFeatures.forEach((entry, mac) => {
+      if (entry.apId === apId) toRemove.push(mac);
+    });
+    toRemove.forEach((mac) => {
+      const entry = clientFeatures.get(mac);
+      if (entry.dot) clientSource.removeFeature(entry.dot);
+      if (entry.link) clientLinkSource.removeFeature(entry.link);
+      clientFeatures.delete(mac);
+    });
+
+    if (!filters.showClients) return;
+
+    const apFeature = deviceFeatures.get(apId);
+    if (!apFeature) return;
+    const dev = apFeature.get('device');
+    const clients = dev?.client_list || [];
+    if (clients.length === 0) return;
+
+    clients.forEach((client, i) => {
+      const coord = clientRingCoord(apProjCoord, i, clients.length);
+
+      const dot = new ol.Feature({ geometry: new ol.geom.Point(coord) });
+      dot.set('client', { ...client, apId });
+      clientSource.addFeature(dot);
+
+      const linkFeat = new ol.Feature({
+        geometry: new ol.geom.LineString([apProjCoord, coord]),
+      });
+      linkFeat.set('clientLink', true);
+      clientLinkSource.addFeature(linkFeat);
+
+      clientFeatures.set(client.mac || `${apId}-${i}`, { dot, link: linkFeat, apId });
+    });
+  }
+
   function renderDevices() {
     const centroid = computeCentroid(networkData?.uisp || []);
     const deviceSource = deviceLayer.getSource();
     const clientSource = clientLayer.getSource();
+    const clientLinkSource = clientLinkLayer.getSource();
     deviceSource.clear();
     clientSource.clear();
+    clientLinkSource.clear();
     deviceFeatures.clear();
+    clientFeatures.clear();
 
     if (filters.showUnifi) {
       for (const dev of networkData?.unifi || []) {
@@ -512,22 +903,9 @@
         deviceSource.addFeature(feature);
         deviceFeatures.set(dev.id, feature);
 
-        // Render client swarm
-        if (!isOffline && dev.clients > 0) {
-          const deviceProjCoord = ol.proj.fromLonLat([lon, lat]);
-          for (let i = 0; i < dev.clients; i++) {
-            // Random orbit around device
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 10 + Math.random() * 15; // 10-25 meters/units offset
-            const clientCoord = [
-              deviceProjCoord[0] + Math.cos(angle) * distance,
-              deviceProjCoord[1] + Math.sin(angle) * distance
-            ];
-            const clientFeature = new ol.Feature({
-              geometry: new ol.geom.Point(clientCoord)
-            });
-            clientSource.addFeature(clientFeature);
-          }
+        // Render real client dots + links
+        if (!isOffline) {
+          renderClients(dev.id, ol.proj.fromLonLat([lon, lat]));
         }
       }
     }
@@ -545,23 +923,6 @@
         feature.set('device', { ...dev, source: 'uisp', lat: pos.lat, lon: pos.lon });
         deviceSource.addFeature(feature);
         deviceFeatures.set(dev.id, feature);
-
-        // Render client swarm for UISP
-        if (!isOffline && dev.clients > 0) {
-          const deviceProjCoord = ol.proj.fromLonLat([pos.lon, pos.lat]);
-          for (let i = 0; i < dev.clients; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 12 + Math.random() * 18;
-            const clientCoord = [
-              deviceProjCoord[0] + Math.cos(angle) * distance,
-              deviceProjCoord[1] + Math.sin(angle) * distance
-            ];
-            const clientFeature = new ol.Feature({
-              geometry: new ol.geom.Point(clientCoord)
-            });
-            clientSource.addFeature(clientFeature);
-          }
-        }
       }
     }
     renderDeviceList();
@@ -610,35 +971,47 @@
     });
   }
 
-  function exportPositionLookup() {
-    const overrides = loadPositionOverrides();
-    const comment = "Manually measured lat/lon for UniFi access points. Add entries as you measure devices. MAC address (id) is the key. Include name for human readability.";
-    const output = {
-      "_comment": comment
-    };
+  function isUnifiId(id) {
+    return typeof id === 'string' && id.includes(':');
+  }
+  function isUispId(id) {
+    return typeof id === 'string' && id.includes('-') && id.length >= 32;
+  }
 
-    // Merge current overrides with existing data names if possible
-    for (const [id, pos] of Object.entries(overrides)) {
-      const dev = getDeviceById(id);
-      output[id] = {
-        name: dev?.name || `Device ${id}`,
-        lat: pos.lat,
-        lon: pos.lon
-      };
-    }
-
-    const json = JSON.stringify(output, null, 2);
-    
-    // Create a blob and download it
-    const blob = new Blob([json], { type: 'application/json' });
+  function downloadJson(filename, obj) {
+    const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'unifi_position_lookup.json';
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
-    
-    alert('Positions exported! Replace unifi_position_lookup.json with this file to persist changes.');
+  }
+
+  function exportPositionLookup() {
+    const overrides = loadPositionOverrides();
+    const unifiOut = { "_comment": "UniFi device positions (MAC = key). Replace unifi_position_lookup.json." };
+    const uispOut = { "_comment": "UISP device positions (device UUID = key). Replace uisp_position_lookup.json." };
+
+    for (const [id, pos] of Object.entries(overrides)) {
+      const dev = getDeviceById(id);
+      const entry = { lat: pos.lat, lon: pos.lon };
+      if (isUnifiId(id)) {
+        unifiOut[id] = { name: dev?.name || `Device ${id}`, ...entry };
+      } else if (isUispId(id)) {
+        uispOut[id] = { name: dev?.name || id, ...entry };
+      }
+    }
+
+    if (Object.keys(unifiOut).length > 1) downloadJson('unifi_position_lookup.json', unifiOut);
+    if (Object.keys(uispOut).length > 1) downloadJson('uisp_position_lookup.json', uispOut);
+
+    const parts = [];
+    if (Object.keys(unifiOut).length > 1) parts.push('unifi_position_lookup.json');
+    if (Object.keys(uispOut).length > 1) parts.push('uisp_position_lookup.json');
+    alert(parts.length
+      ? 'Экспорт: ' + parts.join(', ') + '. Положите файлы в папку проекта и запустите: python network_collector.py'
+      : 'Нет сохранённых позиций. Включите Admin, перетащите устройства и нажмите Export снова.');
   }
 
   function renderLinks() {
@@ -714,6 +1087,142 @@
     }
   }
 
+  function stopTimelinePlayback() {
+    timelinePlaying = false;
+    if (timelineTimer) {
+      clearInterval(timelineTimer);
+      timelineTimer = null;
+    }
+    const playBtn = document.getElementById('timeline-play');
+    if (playBtn) playBtn.textContent = 'Play';
+  }
+
+  function updateTimelineLabel(ts) {
+    const label = document.getElementById('timeline-ts');
+    if (!label) return;
+    if (!ts) {
+      label.textContent = 'Live';
+      return;
+    }
+    const dt = new Date(ts);
+    label.textContent = isNaN(dt.getTime()) ? ts : dt.toLocaleString();
+  }
+
+  function applyTimelineFrame(idx) {
+    if (!baseNetworkData || timelineFrames.length === 0) return;
+    const frame = timelineFrames[idx];
+    if (!frame) return;
+
+    timelineFrameIdx = idx;
+    const slider = document.getElementById('timeline-slider');
+    if (slider) slider.value = String(idx);
+    updateTimelineLabel(frame.ts);
+
+    // Start from latest topology/coords, then overlay state metrics from frame
+    networkData = deepClone(baseNetworkData);
+    const devMap = new Map((frame.devices || []).map((d) => [d.id, d]));
+    const frameLinkMap = new Map((frame.links || []).map((l) => [linkKey(l), l]));
+
+    for (const dev of (networkData.unifi || [])) {
+      const item = devMap.get(dev.id);
+      if (!item) continue;
+      if (item.state != null) dev.state = item.state;
+      if (item.clients != null) dev.clients = item.clients;
+      if (item.tx_bytes != null) dev.tx_bytes = item.tx_bytes;
+      if (item.rx_bytes != null) dev.rx_bytes = item.rx_bytes;
+    }
+    for (const dev of (networkData.uisp || [])) {
+      const item = devMap.get(dev.id);
+      if (!item) continue;
+      if (item.state != null) dev.state = item.state;
+      if (item.clients != null) dev.clients = item.clients;
+      if (item.tx_bytes != null) dev.tx_bytes = item.tx_bytes;
+      if (item.rx_bytes != null) dev.rx_bytes = item.rx_bytes;
+    }
+    for (const link of (networkData.links || [])) {
+      const item = frameLinkMap.get(linkKey(link));
+      if (!item) continue;
+      if (item.signal != null) link.signal = item.signal;
+      if (item.state != null) link.state = item.state;
+    }
+
+    renderDevices();
+    renderLinks();
+  }
+
+  function startTimelinePlayback() {
+    if (timelineFrames.length === 0) return;
+    stopTimelinePlayback();
+    timelinePlaying = true;
+    const playBtn = document.getElementById('timeline-play');
+    const speedEl = document.getElementById('timeline-speed');
+    if (playBtn) playBtn.textContent = 'Pause';
+
+    const tick = () => {
+      const speed = Math.max(1, parseInt(speedEl?.value || '1', 10));
+      const nextIdx = (timelineFrameIdx + speed) % timelineFrames.length;
+      applyTimelineFrame(nextIdx);
+    };
+    timelineTimer = setInterval(tick, 700);
+  }
+
+  function bindTimelineUi() {
+    const playBtn = document.getElementById('timeline-play');
+    const slider = document.getElementById('timeline-slider');
+    const speedEl = document.getElementById('timeline-speed');
+
+    if (!playBtn || !slider || !speedEl) return;
+
+    playBtn.addEventListener('click', () => {
+      if (!timelineFrames.length) return;
+      if (timelinePlaying) {
+        stopTimelinePlayback();
+      } else {
+        startTimelinePlayback();
+      }
+    });
+
+    slider.addEventListener('input', (e) => {
+      stopTimelinePlayback();
+      const idx = parseInt(e.target.value, 10) || 0;
+      applyTimelineFrame(idx);
+    });
+
+    speedEl.addEventListener('change', () => {
+      if (!timelinePlaying) return;
+      startTimelinePlayback();
+    });
+  }
+
+  function loadTimeline() {
+    return fetch(TIMELINE_URL)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((timeline) => {
+        timelineFrames = timeline?.frames || [];
+        const slider = document.getElementById('timeline-slider');
+        if (slider) {
+          slider.max = String(Math.max(0, timelineFrames.length - 1));
+          slider.value = '0';
+          slider.disabled = timelineFrames.length === 0;
+        }
+        if (timelineFrames.length > 0) {
+          applyTimelineFrame(0);
+        } else {
+          updateTimelineLabel(null);
+        }
+      })
+      .catch((err) => {
+        timelineFrames = [];
+        updateTimelineLabel(null);
+        const slider = document.getElementById('timeline-slider');
+        if (slider) slider.disabled = true;
+        console.warn('Timeline not available yet:', err.message);
+      });
+  }
+
   function loadData() {
     const btn = document.getElementById('refresh-btn');
     btn.disabled = true;
@@ -726,10 +1235,13 @@
       })
       .then((data) => {
         networkData = data;
+        baseNetworkData = deepClone(data);
+        stopTimelinePlayback();
         renderDevices();
         renderLinks();
         fitMapToData();
         selectFeature(null);
+        return loadTimeline();
       })
       .catch((err) => {
         console.error('Failed to load network data:', err);

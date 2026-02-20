@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bombay Mars LAN Map</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%234ecdc4' stroke='%233ba89f' stroke-width='2'/><circle cx='16' cy='16' r='4' fill='%23fff'/></svg>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@10.7.0/ol.css">
   <link rel="stylesheet" href="map.css">
 </head>
@@ -15,9 +16,9 @@
         <button id="refresh-btn" type="button" title="Reload network data">Refresh</button>
         <label class="admin-toggle">
           <input type="checkbox" id="admin-mode" />
-          <span>Admin (drag UniFi)</span>
+          <span>Admin (drag devices)</span>
         </label>
-        <button id="export-positions-btn" class="secondary-btn" title="Export unifi_position_lookup.json">Export JSON</button>
+        <button id="export-positions-btn" class="secondary-btn" title="Export UniFi + UISP positions to JSON">Export positions</button>
       </div>
     </header>
 
@@ -29,7 +30,10 @@
             <label><input type="radio" name="base-layer" value="osm" checked> Streets</label>
             <label><input type="radio" name="base-layer" value="satellite"> Satellite</label>
           </div>
-          <label class="layer-overlay"><input type="checkbox" id="layer-drone-overlay"> Drone photo (поверх карты)</label>
+          <div class="layer-overlay">
+            <label><input type="checkbox" id="layer-drone-overlay"> Drone photo</label>
+            <span class="layer-overlay-hint">поверх Satellite/Streets</span>
+          </div>
         </section>
 
         <section class="controls-group">
@@ -38,6 +42,7 @@
           <label><input type="checkbox" id="layer-unifi" checked> UniFi Devices</label>
           <label><input type="checkbox" id="layer-wireless" checked> Wireless Links</label>
           <label><input type="checkbox" id="layer-wired" checked> Wired Links</label>
+          <label><input type="checkbox" id="layer-clients" checked> Client Devices</label>
         </section>
 
         <section class="controls-group">
@@ -74,6 +79,17 @@
         <div id="inspector-content" class="inspector-content"></div>
       </aside>
     </main>
+
+    <section id="timeline-panel" class="timeline-panel">
+      <button id="timeline-play" type="button" class="timeline-btn">Play</button>
+      <select id="timeline-speed" class="timeline-speed">
+        <option value="1">1x</option>
+        <option value="2">2x</option>
+        <option value="4">4x</option>
+      </select>
+      <input id="timeline-slider" class="timeline-slider" type="range" min="0" max="0" value="0" step="1" />
+      <div id="timeline-ts" class="timeline-ts">Live</div>
+    </section>
   </div>
 
   <!-- Библиотека для чтения GeoTIFF — должна быть загружена до OpenLayers -->

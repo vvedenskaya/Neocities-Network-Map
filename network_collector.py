@@ -6,6 +6,7 @@ Outputs JSON and TSV for the interactive map visualization.
 
 import json
 import os
+from datetime import datetime, timedelta, timezone
 import urllib3
 import requests
 from dotenv import load_dotenv
@@ -14,6 +15,107 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 load_dotenv()
 
 UNIFI_POSITION_LOOKUP = "unifi_position_lookup.json"
+UISP_POSITION_LOOKUP = "uisp_position_lookup.json"
+HISTORY_DIR = "history"
+SNAPSHOT_LOG = os.path.join(HISTORY_DIR, "network_snapshots.jsonl")
+TIMELINE_24H = os.path.join(HISTORY_DIR, "timeline_24h.json")
+
+
+def iso_utc_now():
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def parse_iso_utc(value):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def build_snapshot(data):
+    """Build compact snapshot frame for timeline playback."""
+    frame = {
+        "ts": iso_utc_now(),
+        "devices": [],
+        "links": [],
+    }
+    for dev in data.get("unifi", []):
+        frame["devices"].append(
+            {
+                "id": dev.get("id"),
+                "source": "unifi",
+                "state": dev.get("state"),
+                "clients": dev.get("clients", 0),
+                "tx_bytes": dev.get("tx_bytes"),
+                "rx_bytes": dev.get("rx_bytes"),
+            }
+        )
+    for dev in data.get("uisp", []):
+        frame["devices"].append(
+            {
+                "id": dev.get("id"),
+                "source": "uisp",
+                "state": dev.get("state"),
+                "clients": dev.get("clients", 0),
+                "tx_bytes": dev.get("tx_bytes"),
+                "rx_bytes": dev.get("rx_bytes"),
+            }
+        )
+    for link in data.get("links", []):
+        frame["links"].append(
+            {
+                "from": link.get("from"),
+                "to": link.get("to"),
+                "type": link.get("type"),
+                "state": link.get("state"),
+                "signal": link.get("signal"),
+            }
+        )
+    return frame
+
+
+def append_snapshot(frame):
+    os.makedirs(HISTORY_DIR, exist_ok=True)
+    with open(SNAPSHOT_LOG, "a", encoding="utf-8") as f:
+        f.write(json.dumps(frame, ensure_ascii=False) + "\n")
+
+
+def load_recent_snapshots(hours=24):
+    if not os.path.exists(SNAPSHOT_LOG):
+        return []
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+    snapshots = []
+    with open(SNAPSHOT_LOG, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                item = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            ts = parse_iso_utc(item.get("ts"))
+            if ts is None:
+                continue
+            if ts >= cutoff:
+                snapshots.append(item)
+    snapshots.sort(key=lambda x: x.get("ts", ""))
+    return snapshots
+
+
+def write_timeline_24h():
+    snapshots = load_recent_snapshots(hours=24)
+    os.makedirs(HISTORY_DIR, exist_ok=True)
+    payload = {
+        "generated_at": iso_utc_now(),
+        "range_hours": 24,
+        "frames": snapshots,
+    }
+    with open(TIMELINE_24H, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+    return len(snapshots)
 
 
 def load_unifi_position_lookup():
@@ -22,6 +124,18 @@ def load_unifi_position_lookup():
         return {}
     try:
         with open(UNIFI_POSITION_LOOKUP, encoding="utf-8") as f:
+            data = json.load(f)
+        return {k: v for k, v in data.items() if not k.startswith("_") and isinstance(v, dict)}
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def load_uisp_position_lookup():
+    """Load manually adjusted UISP device positions (from map drag). Returns dict of device_id -> {lat, lon}."""
+    if not os.path.exists(UISP_POSITION_LOOKUP):
+        return {}
+    try:
+        with open(UISP_POSITION_LOOKUP, encoding="utf-8") as f:
             data = json.load(f)
         return {k: v for k, v in data.items() if not k.startswith("_") and isinstance(v, dict)}
     except (json.JSONDecodeError, OSError):
@@ -49,6 +163,28 @@ class UniFiCollector:
             f"/proxy/network/integration/v1/sites/{self.site}/devices",
             f"/proxy/network/api/s/{self.site}/stat/device",
             f"/api/s/{self.site}/stat/device",
+        ]
+        for path in paths:
+            url = f"{self.base_url}{path}"
+            try:
+                response = self.session.get(url, verify=False, timeout=15)
+                if response.status_code == 200:
+                    try:
+                        res_json = response.json()
+                        if isinstance(res_json, list):
+                            return res_json
+                        return res_json.get("data", [])
+                    except (ValueError, TypeError):
+                        continue
+            except requests.RequestException:
+                continue
+        return []
+
+    def get_clients(self):
+        """Fetch connected clients from UniFi controller."""
+        paths = [
+            f"/proxy/network/api/s/{self.site}/stat/sta",
+            f"/api/s/{self.site}/stat/sta",
         ]
         for path in paths:
             url = f"{self.base_url}{path}"
@@ -109,13 +245,35 @@ class UISPCollector:
         return []
 
 
-def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
+def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_clients=None):
     """
     Combine UniFi and UISP data into a unified structure for the map.
     UniFi device coordinates: manual lookup > API x/y > centroid of UISP devices.
     """
     combined = {"unifi": [], "uisp": [], "links": [], "map_metadata": {}}
     position_lookup = load_unifi_position_lookup()
+    uisp_position_lookup = load_uisp_position_lookup()
+
+    # Build client lookup: device_mac -> [list of client dicts]
+    # Wi-Fi clients use ap_mac; wired clients (on switches) use sw_mac
+    client_map = {}
+    for c in (unifi_clients or []):
+        device_mac = c.get("ap_mac") or c.get("sw_mac")
+        if not device_mac:
+            continue
+        client_map.setdefault(device_mac, []).append({
+            "mac": c.get("mac"),
+            "name": c.get("name") or c.get("hostname") or c.get("oui") or c.get("mac"),
+            "ip": c.get("ip"),
+            "rssi": c.get("rssi"),
+            "signal": c.get("signal"),
+            "tx_bytes": c.get("tx_bytes"),
+            "rx_bytes": c.get("rx_bytes"),
+            "uptime": c.get("uptime"),
+            "os": c.get("os_name") or c.get("dev_cat"),
+            "radio": c.get("radio_proto"),
+            "channel": c.get("channel"),
+        })
 
     # Build site coords lookup
     site_map = {}
@@ -129,10 +287,12 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
                     "lon": loc.get("longitude"),
                 }
 
-    # UniFi devices
+    # UniFi devices — only include devices listed in unifi_position_lookup.json
     if isinstance(unifi_devs, list):
         for dev in unifi_devs:
             mac = dev.get("mac")
+            if mac not in position_lookup:
+                continue
             uplink_mac = dev.get("uplink_mac") or dev.get("uplink", {}).get("uplink_mac")
             combined["unifi"].append(
                 {
@@ -142,8 +302,14 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
                     "model": dev.get("model"),
                     "state": dev.get("state", 1),
                     "clients": dev.get("num_sta", 0),
+                    "client_list": client_map.get(mac, []),
                     "x": dev.get("x"),
                     "y": dev.get("y"),
+                    "ip": dev.get("ip"),
+                    "version": dev.get("version"),
+                    "uptime": dev.get("uptime"),
+                    "tx_bytes": dev.get("tx_bytes"),
+                    "rx_bytes": dev.get("rx_bytes"),
                 }
             )
             if uplink_mac:
@@ -199,6 +365,13 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links):
                         "lon": lon,
                     }
                 )
+
+    # Apply manual UISP position overrides (from map drag & export)
+    for dev in combined["uisp"]:
+        override = uisp_position_lookup.get(dev["id"])
+        if override and override.get("lat") is not None and override.get("lon") is not None:
+            dev["lat"] = float(override["lat"])
+            dev["lon"] = float(override["lon"])
 
     # Assign coordinates to UniFi devices: manual lookup > API x/y > centroid
     centroid_lat = sum(lats) / len(lats) if lats else None
@@ -274,10 +447,11 @@ def main():
     UISP_KEY = os.getenv("UISP_KEY")
 
     unifi_devices = []
+    unifi_clients = []
     if UNIFI_URL and UNIFI_KEY:
-        unifi_devices = UniFiCollector(
-            UNIFI_URL, UNIFI_KEY, site=UNIFI_SITE
-        ).get_devices()
+        unifi_col = UniFiCollector(UNIFI_URL, UNIFI_KEY, site=UNIFI_SITE)
+        unifi_devices = unifi_col.get_devices()
+        unifi_clients = unifi_col.get_clients()
 
     uisp_devices, uisp_sites, uisp_links = [], [], []
     if UISP_URL and UISP_KEY:
@@ -287,16 +461,21 @@ def main():
         uisp_links = coll.get_datalinks()
 
     data = format_network_data(
-        unifi_devices, uisp_devices, uisp_sites, uisp_links
+        unifi_devices, uisp_devices, uisp_sites, uisp_links, unifi_clients
     )
 
     with open("network_data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+    snapshot = build_snapshot(data)
+    append_snapshot(snapshot)
+    timeline_frames = write_timeline_24h()
+
     print(
         f"\n--- Results ---\n"
         f"UniFi: {len(data['unifi'])} | UISP: {len(data['uisp'])} | "
-        f"Links: {len(data['links'])}"
+        f"Links: {len(data['links'])}\n"
+        f"Timeline(24h) frames: {timeline_frames}"
     )
 
 
