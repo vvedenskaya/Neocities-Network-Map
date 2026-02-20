@@ -444,47 +444,166 @@ body {
 }
 
 .timeline-panel {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.1rem;
+  z-index: 1200;
+  width: min(640px, calc(100vw - 2rem));
+  border: 1px solid rgba(137, 177, 224, 0.35);
+  border-radius: 28px;
+  padding: 1rem 1.1rem 0.82rem;
+  background: linear-gradient(180deg, rgba(29, 43, 66, 0.95), rgba(23, 35, 56, 0.94));
+  color: #e7efff;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(170, 205, 255, 0.15);
+  backdrop-filter: blur(10px) saturate(115%);
+}
+
+.timeline-top {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.55rem 0.9rem;
-  border-top: 1px solid var(--border);
-  background: rgba(20, 23, 29, 0.96);
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
 }
 
-.timeline-btn {
-  padding: 0.35rem 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: var(--bg-hover);
-  color: var(--text);
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.timeline-btn:hover {
-  background: #3a404d;
-}
-
-.timeline-speed {
-  min-width: 58px;
-  background: var(--bg-dark);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.25rem 0.3rem;
-}
-
-.timeline-slider {
-  flex: 1;
-  accent-color: var(--accent);
+.timeline-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .timeline-ts {
-  min-width: 165px;
-  text-align: right;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #eaf3ff;
+  letter-spacing: -0.01em;
+}
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.timeline-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #2f7fd8, #225fa8);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 18px rgba(21, 51, 92, 0.45);
+}
+
+.timeline-btn:hover {
+  background: linear-gradient(180deg, #3a8eea, #2a6fbe);
+}
+
+.timeline-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.timeline-speed {
+  min-width: 62px;
+  background: rgba(152, 183, 224, 0.16);
+  color: #e9f2ff;
+  border: 1px solid rgba(132, 170, 218, 0.35);
+  border-radius: 12px;
+  padding: 0.28rem 0.42rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.timeline-range {
+  min-width: 72px;
+  background: rgba(152, 183, 224, 0.16);
+  color: #e9f2ff;
+  border: 1px solid rgba(132, 170, 218, 0.35);
+  border-radius: 12px;
+  padding: 0.28rem 0.42rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.timeline-slider-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.timeline-slider {
+  width: 100%;
+  accent-color: #58d0ff;
+}
+
+.timeline-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 8px;
+  background: rgba(120, 155, 204, 0.24);
+  border: 1px solid rgba(136, 173, 223, 0.35);
+}
+
+.timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #58d0ff;
+  border: 2px solid #dff6ff;
+  margin-top: -6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.timeline-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 8px;
+  background: rgba(120, 155, 204, 0.24);
+  border: 1px solid rgba(136, 173, 223, 0.35);
+}
+
+.timeline-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #58d0ff;
+  border: 2px solid #dff6ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.timeline-hours {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.25rem;
+  font-size: 0.84rem;
+  color: #c7d7f2;
+  opacity: 0.95;
+}
+
+.timeline-hours span {
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .timeline-panel {
+    left: 0.5rem;
+    transform: none;
+    width: auto;
+    bottom: 0.5rem;
+    border-radius: 14px;
+    padding: 0.72rem;
+  }
+  .timeline-ts {
+    font-size: 0.95rem;
+  }
+  .timeline-hours {
+    font-size: 0.74rem;
+  }
 }
 
 /* OpenLayers overrides */

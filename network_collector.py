@@ -19,6 +19,8 @@ UISP_POSITION_LOOKUP = "uisp_position_lookup.json"
 HISTORY_DIR = "history"
 SNAPSHOT_LOG = os.path.join(HISTORY_DIR, "network_snapshots.jsonl")
 TIMELINE_24H = os.path.join(HISTORY_DIR, "timeline_24h.json")
+TIMELINE_7D = os.path.join(HISTORY_DIR, "timeline_7d.json")
+TIMELINE_30D = os.path.join(HISTORY_DIR, "timeline_30d.json")
 
 
 def iso_utc_now():
@@ -105,17 +107,48 @@ def load_recent_snapshots(hours=24):
     return snapshots
 
 
-def write_timeline_24h():
-    snapshots = load_recent_snapshots(hours=24)
+def bucket_snapshots(snapshots, bucket_minutes):
+    """Keep latest frame in each time bucket for smoother playback performance."""
+    if not snapshots:
+        return []
+    bucketed = {}
+    bucket_sec = bucket_minutes * 60
+    for frame in snapshots:
+        ts = parse_iso_utc(frame.get("ts"))
+        if ts is None:
+            continue
+        bucket_key = int(ts.timestamp()) // bucket_sec
+        existing = bucketed.get(bucket_key)
+        if existing is None or frame.get("ts", "") > existing.get("ts", ""):
+            bucketed[bucket_key] = frame
+    return [bucketed[k] for k in sorted(bucketed.keys())]
+
+
+def write_timeline(path, hours, bucket_minutes):
+    snapshots = load_recent_snapshots(hours=hours)
+    frames = bucket_snapshots(snapshots, bucket_minutes=bucket_minutes)
     os.makedirs(HISTORY_DIR, exist_ok=True)
     payload = {
         "generated_at": iso_utc_now(),
-        "range_hours": 24,
-        "frames": snapshots,
+        "range_hours": hours,
+        "bucket_minutes": bucket_minutes,
+        "frames": frames,
     }
-    with open(TIMELINE_24H, "w", encoding="utf-8") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
-    return len(snapshots)
+    return len(frames)
+
+
+def write_timeline_24h():
+    return write_timeline(TIMELINE_24H, hours=24, bucket_minutes=10)
+
+
+def write_timeline_7d():
+    return write_timeline(TIMELINE_7D, hours=24 * 7, bucket_minutes=60)
+
+
+def write_timeline_30d():
+    return write_timeline(TIMELINE_30D, hours=24 * 30, bucket_minutes=180)
 
 
 def load_unifi_position_lookup():
@@ -469,13 +502,16 @@ def main():
 
     snapshot = build_snapshot(data)
     append_snapshot(snapshot)
-    timeline_frames = write_timeline_24h()
+    timeline_24h_frames = write_timeline_24h()
+    timeline_7d_frames = write_timeline_7d()
+    timeline_30d_frames = write_timeline_30d()
 
     print(
         f"\n--- Results ---\n"
         f"UniFi: {len(data['unifi'])} | UISP: {len(data['uisp'])} | "
         f"Links: {len(data['links'])}\n"
-        f"Timeline(24h) frames: {timeline_frames}"
+        f"Timeline frames — 24h: {timeline_24h_frames}, "
+        f"7d: {timeline_7d_frames}, 30d: {timeline_30d_frames}"
     )
 
 

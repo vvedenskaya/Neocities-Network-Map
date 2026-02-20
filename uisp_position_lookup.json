@@ -1,0 +1,43 @@
+{
+  "_comment": "UISP device positions (device UUID = key). Replace uisp_position_lookup.json.",
+  "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb": {
+    "name": "mars-rf-sector-e",
+    "lat": 33.362348666937564,
+    "lon": -115.71383809562928
+  },
+  "37ae6008-a316-455a-8be8-a8607f531984": {
+    "name": "mars-rf-c7:72-freeside",
+    "lat": 33.3623813245859,
+    "lon": -115.71285942570097
+  },
+  "e718ccbd-3844-49d5-9e5f-7b90fa96c240": {
+    "name": "mars-rf-ptp-venus-60",
+    "lat": 33.36208065870815,
+    "lon": -115.7140109080056
+  },
+  "b6125f83-3a1c-4342-89cb-c140b5c2ec0e": {
+    "name": "mars-rf-og-camp-9e:5d",
+    "lat": 33.36298730519488,
+    "lon": -115.71483476644546
+  },
+  "e72959fb-664a-4a69-9405-0cc4717a08a8": {
+    "name": "mars-rf-og-rvs-85:92",
+    "lat": 33.363125245542236,
+    "lon": -115.71436326401442
+  },
+  "875d2133-a7d2-4889-91ee-5d895a5d2cda": {
+    "name": "mars-rf-sector-n",
+    "lat": 33.36233461157279,
+    "lon": -115.71395686256709
+  },
+  "b1b8511b-311c-4877-a907-6dfe23de3c43": {
+    "name": "mars-rf-262b - colab",
+    "lat": 33.362274963334784,
+    "lon": -115.71293573128058
+  },
+  "e0e8b15d-e008-4e37-b879-18594b512333": {
+    "name": "mars-rf-tool-983a",
+    "lat": 33.36284923222078,
+    "lon": -115.71352585155572
+  }
+}

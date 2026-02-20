@@ -32,7 +32,6 @@
           </div>
           <div class="layer-overlay">
             <label><input type="checkbox" id="layer-drone-overlay"> Drone photo</label>
-            <span class="layer-overlay-hint">поверх Satellite/Streets</span>
           </div>
         </section>
 
@@ -81,14 +80,30 @@
     </main>
 
     <section id="timeline-panel" class="timeline-panel">
-      <button id="timeline-play" type="button" class="timeline-btn">Play</button>
-      <select id="timeline-speed" class="timeline-speed">
-        <option value="1">1x</option>
-        <option value="2">2x</option>
-        <option value="4">4x</option>
-      </select>
-      <input id="timeline-slider" class="timeline-slider" type="range" min="0" max="0" value="0" step="1" />
-      <div id="timeline-ts" class="timeline-ts">Live</div>
+      <div class="timeline-top">
+        <div id="timeline-ts" class="timeline-ts">Now</div>
+        <div class="timeline-controls-right">
+          <select id="timeline-range" class="timeline-range" title="Timescale">
+            <option value="24h">24h</option>
+            <option value="7d">7d</option>
+            <option value="30d">30d</option>
+          </select>
+          <select id="timeline-speed" class="timeline-speed" title="Playback speed">
+          <option value="1">1x</option>
+          <option value="2">2x</option>
+          <option value="4">4x</option>
+          </select>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <button id="timeline-play" type="button" class="timeline-btn" aria-label="Play timeline">▶</button>
+        <div class="timeline-slider-wrap">
+          <input id="timeline-slider" class="timeline-slider" type="range" min="0" max="0" value="0" step="1" />
+          <div class="timeline-hours">
+            <span>7p</span><span>8p</span><span>9p</span><span>10p</span><span>11p</span><span>12a</span><span>1a</span><span>2a</span>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 

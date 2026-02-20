@@ -8,7 +8,11 @@
 
   const STORAGE_KEY = 'bombay-mars-device-positions';
   const DATA_URL = 'network_data.json';
-  const TIMELINE_URL = 'history/timeline_24h.json';
+  const TIMELINE_URLS = {
+    '24h': 'history/timeline_24h.json',
+    '7d': 'history/timeline_7d.json',
+    '30d': 'history/timeline_30d.json',
+  };
 
   const PALETTE = {
     unifi_ap:     '#4ecdc4',  // teal  – UniFi access point
@@ -74,6 +78,7 @@
   let timelinePlaying = false;
   let timelineTimer = null;
   let timelineFrameIdx = 0;
+  let timelineRange = '24h';
 
   const filters = {
     showUisp: true,
@@ -343,17 +348,19 @@
 
   // === Traffic flow animation — draw in map coords directly on link layer ===
 
-  function makeFlowDotStyle(color, radius) {
+  function makeFlowDotStyle(color, radius, mode = 'play') {
+    const strokeColor = mode === 'idle' ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.35)';
+    const strokeWidth = mode === 'idle' ? 1.2 : 1;
     return new ol.style.Style({
       image: new ol.style.Circle({
         radius,
         fill: new ol.style.Fill({ color }),
-        stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.35)', width: 1 }),
+        stroke: new ol.style.Stroke({ color: strokeColor, width: strokeWidth }),
       }),
     });
   }
 
-  function drawFlowOnGeometry(vectorContext, geometry, seconds, bytes, color, reverse) {
+  function drawFlowOnGeometry(vectorContext, geometry, seconds, bytes, color, reverse, mode = 'play') {
     const length = geometry.getLength();
     if (!length || length < 1) return;
 
@@ -361,10 +368,21 @@
     const strength = Math.max(0, Math.min(1, (Math.log10(Math.max(1, bytes)) - 6) / 5));
     if (strength < 0.02) return;
 
-    const numDots = 1 + Math.floor(strength * 3);      // 1-4 dots
-    const cyclesPerSec = 0.06 + strength * 0.22;       // 0.06..0.28 loops/sec
-    const radius = 2 + strength * 1.6;                 // 2..3.6 px
-    const style = makeFlowDotStyle(color, radius);
+    // Two visual modes:
+    // - play: strong flow for timelapse playback
+    // - idle: subtle ambient motion when map is static
+    const isIdle = mode === 'idle';
+    const s = isIdle ? strength * 0.75 : strength;
+    const numDots = isIdle
+      ? 2 + Math.floor(s * 2)     // 2-4 dots
+      : 2 + Math.floor(s * 4);    // 2-6 dots
+    const cyclesPerSec = isIdle
+      ? 0.07 + s * 0.16           // moderate
+      : 0.12 + s * 0.36;          // fast
+    const radius = isIdle
+      ? 2.2 + s * 1.2             // brighter ambient
+      : 2.4 + s * 2.0;            // visible
+    const style = makeFlowDotStyle(color, radius, mode);
 
     vectorContext.setStyle(style);
     for (let i = 0; i < numDots; i++) {
@@ -411,17 +429,38 @@
         const txColor = isWireless ? wirelessColor : PALETTE.flow_tx;
         const rxColor = isWireless ? wirelessColor : PALETTE.flow_rx;
 
-        // TX (upload): source -> destination
-        if (txBytes > 0) {
-          drawFlowOnGeometry(vectorContext, geometry, seconds, txBytes, txColor, false);
-        }
-        // RX (download): destination -> source
-        if (rxBytes > 0) {
-          drawFlowOnGeometry(vectorContext, geometry, seconds, rxBytes, rxColor, true);
+        if (timelinePlaying) {
+          // Strong dual-direction flow while playback is running.
+          if (txBytes > 0) {
+            drawFlowOnGeometry(vectorContext, geometry, seconds, txBytes, txColor, false, 'play');
+          }
+          if (rxBytes > 0) {
+            drawFlowOnGeometry(vectorContext, geometry, seconds, rxBytes, rxColor, true, 'play');
+          }
+        } else {
+          // Ambient multi-color flow while static.
+          const ambientBytes = txBytes || rxBytes;
+          if (ambientBytes > 0) {
+            const ambientColors = isWireless
+              ? [wirelessColor, '#4ecdc4', '#ffd166']
+              : ['#8fa4bd', '#a78bfa'];
+            ambientColors.forEach((c, idx) => {
+              drawFlowOnGeometry(
+                vectorContext,
+                geometry,
+                seconds + idx * 0.35,
+                ambientBytes * (1 - idx * 0.18),
+                c,
+                idx % 2 === 1,
+                'idle'
+              );
+            });
+          }
         }
       });
 
-      map.render();
+      // Keep map repainting for both ambient and playback animation.
+      event.frameState.animate = true;
     });
   }
 
@@ -838,11 +877,14 @@
     const apFeature = deviceFeatures.get(apId);
     if (!apFeature) return;
     const dev = apFeature.get('device');
-    const clients = dev?.client_list || [];
-    if (clients.length === 0) return;
+    const listedClients = Array.isArray(dev?.client_list) ? dev.client_list : [];
+    const count = Math.max(0, parseInt(dev?.clients || 0, 10));
+    if (count === 0 && listedClients.length === 0) return;
+    const renderCount = Math.max(count, listedClients.length);
 
-    clients.forEach((client, i) => {
-      const coord = clientRingCoord(apProjCoord, i, clients.length);
+    for (let i = 0; i < renderCount; i++) {
+      const client = listedClients[i] || { mac: `${apId}-hist-${i}`, name: `Client ${i + 1}` };
+      const coord = clientRingCoord(apProjCoord, i, renderCount);
 
       const dot = new ol.Feature({ geometry: new ol.geom.Point(coord) });
       dot.set('client', { ...client, apId });
@@ -855,7 +897,7 @@
       clientLinkSource.addFeature(linkFeat);
 
       clientFeatures.set(client.mac || `${apId}-${i}`, { dot, link: linkFeat, apId });
-    });
+    }
   }
 
   function renderDevices() {
@@ -923,6 +965,10 @@
         feature.set('device', { ...dev, source: 'uisp', lat: pos.lat, lon: pos.lon });
         deviceSource.addFeature(feature);
         deviceFeatures.set(dev.id, feature);
+
+        if (!isOffline) {
+          renderClients(dev.id, ol.proj.fromLonLat([pos.lon, pos.lat]));
+        }
       }
     }
     renderDeviceList();
@@ -1094,7 +1140,23 @@
       timelineTimer = null;
     }
     const playBtn = document.getElementById('timeline-play');
-    if (playBtn) playBtn.textContent = 'Play';
+    if (playBtn) playBtn.textContent = '▶';
+    // Force one static redraw so animated dots disappear immediately.
+    if (map) map.render();
+  }
+
+  function updateTimelineHours() {
+    const el = document.querySelector('.timeline-hours');
+    if (!el) return;
+    const labels = timelineRange === '30d'
+      ? ['-30d', '-24d', '-18d', '-12d', '-9d', '-6d', '-3d', 'now']
+      : timelineRange === '7d'
+      ? ['-7d', '-6d', '-5d', '-4d', '-3d', '-2d', '-1d', 'now']
+      : ['7p', '8p', '9p', '10p', '11p', '12a', '1a', '2a'];
+    const spans = Array.from(el.querySelectorAll('span'));
+    for (let i = 0; i < Math.min(spans.length, labels.length); i++) {
+      spans[i].textContent = labels[i];
+    }
   }
 
   function updateTimelineLabel(ts) {
@@ -1105,7 +1167,13 @@
       return;
     }
     const dt = new Date(ts);
-    label.textContent = isNaN(dt.getTime()) ? ts : dt.toLocaleString();
+    if (isNaN(dt.getTime())) {
+      label.textContent = ts;
+      return;
+    }
+    const day = dt.toLocaleDateString(undefined, { weekday: 'short' });
+    const hm = dt.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }).replace(' ', '').toLowerCase();
+    label.textContent = `${day} ${hm}`;
   }
 
   function applyTimelineFrame(idx) {
@@ -1151,12 +1219,12 @@
   }
 
   function startTimelinePlayback() {
-    if (timelineFrames.length === 0) return;
+    if (timelineFrames.length < 2) return;
     stopTimelinePlayback();
     timelinePlaying = true;
     const playBtn = document.getElementById('timeline-play');
     const speedEl = document.getElementById('timeline-speed');
-    if (playBtn) playBtn.textContent = 'Pause';
+    if (playBtn) playBtn.textContent = '❚❚';
 
     const tick = () => {
       const speed = Math.max(1, parseInt(speedEl?.value || '1', 10));
@@ -1164,14 +1232,18 @@
       applyTimelineFrame(nextIdx);
     };
     timelineTimer = setInterval(tick, 700);
+    // Trigger animation loop on link postrender.
+    if (map) map.render();
   }
 
   function bindTimelineUi() {
     const playBtn = document.getElementById('timeline-play');
     const slider = document.getElementById('timeline-slider');
     const speedEl = document.getElementById('timeline-speed');
+    const rangeEl = document.getElementById('timeline-range');
 
-    if (!playBtn || !slider || !speedEl) return;
+    if (!playBtn || !slider || !speedEl || !rangeEl) return;
+    updateTimelineHours();
 
     playBtn.addEventListener('click', () => {
       if (!timelineFrames.length) return;
@@ -1192,10 +1264,18 @@
       if (!timelinePlaying) return;
       startTimelinePlayback();
     });
+
+    rangeEl.addEventListener('change', (e) => {
+      timelineRange = e.target.value;
+      stopTimelinePlayback();
+      updateTimelineHours();
+      loadTimeline();
+    });
   }
 
   function loadTimeline() {
-    return fetch(TIMELINE_URL)
+    const url = TIMELINE_URLS[timelineRange] || TIMELINE_URLS['24h'];
+    return fetch(url)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
@@ -1208,8 +1288,14 @@
           slider.value = '0';
           slider.disabled = timelineFrames.length === 0;
         }
+        const playBtn = document.getElementById('timeline-play');
+        if (playBtn) playBtn.disabled = timelineFrames.length < 2;
         if (timelineFrames.length > 0) {
           applyTimelineFrame(0);
+          if (timelineFrames.length < 2) {
+            const label = document.getElementById('timeline-ts');
+            if (label) label.textContent = 'Need more samples';
+          }
         } else {
           updateTimelineLabel(null);
         }
@@ -1219,6 +1305,8 @@
         updateTimelineLabel(null);
         const slider = document.getElementById('timeline-slider');
         if (slider) slider.disabled = true;
+        const playBtn = document.getElementById('timeline-play');
+        if (playBtn) playBtn.disabled = true;
         console.warn('Timeline not available yet:', err.message);
       });
   }
