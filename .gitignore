@@ -14,6 +14,7 @@ env/
 # Generated data (run network_collector.py to produce)
 network_data.json
 network_data.tsv
+history/
 
 # Editor
 .idea/

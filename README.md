@@ -74,6 +74,67 @@ python -m http.server 8000
 
 Then open [http://localhost:8000](http://localhost:8000) in your browser.
 
+## Docker Quick Start
+
+This repo includes a 2-container setup:
+
+- `web` - serves the map UI on port `8001`
+- `collector` - runs `network_collector.py` on a fixed interval and writes:
+  - `network_data.json`
+  - `history/network_snapshots.jsonl`
+  - `history/timeline_24h.json`, `history/timeline_7d.json`, `history/timeline_30d.json`
+
+### 1. Prepare env
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with real UniFi/UISP credentials.
+
+### 2. Build and run
+
+```bash
+docker compose up -d --build
+```
+
+Open the app at [http://localhost:8001](http://localhost:8001).
+
+If port `8001` is already busy (for example local `python -m http.server`), run on another host port:
+
+```bash
+WEB_PORT=8002 docker compose up -d --build
+```
+
+Then open [http://localhost:8002](http://localhost:8002).
+
+### 3. Logs and status
+
+```bash
+docker compose ps
+docker compose logs -f collector
+docker compose logs -f web
+```
+
+### 4. Stop
+
+```bash
+docker compose down
+```
+
+### Optional: change sampling interval
+
+Set in `.env`:
+
+```env
+COLLECT_INTERVAL_SECONDS=300
+```
+
+Examples:
+
+- `300` = every 5 minutes
+- `600` = every 10 minutes
+
 For GitHub Pages, push the repo and enable Pages in Settings → Pages → Source: main branch.
 
 The map:
