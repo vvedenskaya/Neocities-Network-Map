@@ -137,6 +137,13 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
   }
 
+  function clearPositionOverride(id) {
+    const overrides = loadPositionOverrides();
+    if (!(id in overrides)) return;
+    delete overrides[id];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides));
+  }
+
   function getDeviceById(id) {
     for (const dev of (networkData?.unifi || [])) if (dev.id === id) return { ...dev, source: 'unifi' };
     for (const dev of (networkData?.uisp || [])) if (dev.id === id) return { ...dev, source: 'uisp' };
@@ -467,7 +474,7 @@
   function initMap() {
     streetLayer = new ol.layer.Tile({
       source: new ol.source.OSM(),
-      visible: true,
+      visible: false, // default: satellite base
       maxZoom: 22, // Allow scaling tiles beyond their native zoom
     });
 
@@ -477,7 +484,7 @@
         attributions: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EBP, and the GIS User Community',
         maxZoom: 19, // Esri usually goes up to 19
       }),
-      visible: false,
+      visible: true, // default: satellite base
       maxZoom: 22, // Allow OpenLayers to upscale the tiles
     });
 
@@ -495,7 +502,7 @@
         droneLayer = new ol.layer.WebGLTile({
           source: droneSource,
           opacity: 0.85,
-          visible: false,
+          visible: true, // default: drone overlay on
           zIndex: 1,
         });
         droneSource.on('tileloaderror', function () {
@@ -523,18 +530,14 @@
       // Перемещаем клиентов вслед за их AP
       const movedDev = e.feature?.get('device');
       if (movedDev) {
-        const newCoord = e.feature.getGeometry().getCoordinates();
-        clientFeatures.forEach((entry) => {
-          if (entry.apId !== movedDev.id) return;
-          // Найти индекс этого клиента среди клиентов AP
-          const apDev = e.feature.get('device');
-          const clients = apDev?.client_list || [];
-          const allEntries = [...clientFeatures.values()].filter(en => en.apId === movedDev.id);
-          const idx = allEntries.indexOf(entry);
-          const total = allEntries.length;
-          const newClientCoord = clientRingCoord(newCoord, idx, total);
+        const apNewCoord = e.feature.getGeometry().getCoordinates();
+        const allEntries = [...clientFeatures.values()].filter((en) => en.apId === movedDev.id);
+        const total = allEntries.length;
+        allEntries.forEach((entry, idx) => {
+          const client = entry.dot?.get('client');
+          const newClientCoord = clientRingCoord(apNewCoord, idx, total, client);
           entry.dot.getGeometry().setCoordinates(newClientCoord);
-          entry.link.getGeometry().setCoordinates([newCoord, newClientCoord]);
+          entry.link.getGeometry().setCoordinates([apNewCoord, newClientCoord]);
         });
       }
     });
@@ -808,6 +811,7 @@
         </div>
       ` : (hasClientData && dev.clients > 0 ? `<div class="clients-section"><div class="clients-header">Clients (${dev.clients})</div><p class="clients-hint">Run script to load details</p></div>` : '');
 
+      const hasOverride = (loadPositionOverrides())[dev.id];
       content.innerHTML = `
         ${thumbHtml}
         <dl>
@@ -822,8 +826,16 @@
           ${dev.clients != null ? `<dt>Clients</dt><dd>${dev.clients}</dd>` : ''}
           <dt>Coordinates</dt><dd>${(dev.lat != null && dev.lon != null) ? `${dev.lat.toFixed(5)}, ${dev.lon.toFixed(5)}` : '-'}</dd>
         </dl>
+        ${hasOverride ? '<p class="position-hint">Position was moved; saved in this browser.</p>' : ''}
+        <button type="button" id="reset-position-btn" class="secondary-btn">Reset position to data</button>
         ${clientsHtml}
       `;
+      content.querySelector('#reset-position-btn').addEventListener('click', () => {
+        clearPositionOverride(dev.id);
+        renderDevices();
+        renderLinks();
+        selectFeature(null);
+      });
     } else if (link) {
       title.textContent = 'Link';
       const fromDev = getDeviceById(link.from);
@@ -846,10 +858,26 @@
     return div.innerHTML;
   }
 
-  // Place clients in a deterministic ring around their AP/switch
-  function clientRingCoord(apProjCoord, index, total) {
+  function clientRadiusFromSignal(client, total) {
+    const minRadius = 14;
+    const maxRadius = total > 8 ? 42 : 34; // slightly larger spread for crowded APs
+    const fallbackRadius = total > 8 ? 30 : 24;
+
+    const raw = client?.signal ?? client?.rssi;
+    if (raw == null) return fallbackRadius;
+    const dbm = Number(raw);
+    if (Number.isNaN(dbm)) return fallbackRadius;
+
+    // Wi-Fi signal usually lives around -90..-40 dBm
+    const clamped = Math.max(-90, Math.min(-40, dbm));
+    const normalized = (clamped + 90) / 50; // 0 (weak) .. 1 (strong)
+    return maxRadius - normalized * (maxRadius - minRadius);
+  }
+
+  // Place clients in a deterministic ring around AP; radius reflects signal strength.
+  function clientRingCoord(apProjCoord, index, total, client) {
     const angle = (index / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2;
-    const radius = 22 + (total > 8 ? 8 : 0); // slightly larger ring for crowded APs
+    const radius = clientRadiusFromSignal(client, total);
     return [
       apProjCoord[0] + Math.cos(angle) * radius,
       apProjCoord[1] + Math.sin(angle) * radius,
@@ -884,7 +912,7 @@
 
     for (let i = 0; i < renderCount; i++) {
       const client = listedClients[i] || { mac: `${apId}-hist-${i}`, name: `Client ${i + 1}` };
-      const coord = clientRingCoord(apProjCoord, i, renderCount);
+      const coord = clientRingCoord(apProjCoord, i, renderCount, client);
 
       const dot = new ol.Feature({ geometry: new ol.geom.Point(coord) });
       dot.set('client', { ...client, apId });
