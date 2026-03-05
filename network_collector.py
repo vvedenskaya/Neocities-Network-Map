@@ -4,6 +4,7 @@ Aggregates device and link data from UniFi Network and UISP (Ubiquiti) APIs.
 Outputs JSON and TSV for the interactive map visualization.
 """
 
+import argparse
 import json
 import os
 from datetime import datetime, timedelta, timezone
@@ -152,13 +153,16 @@ def write_timeline_30d():
 
 
 def load_unifi_position_lookup():
-    """Load manually measured UniFi device positions. Returns dict of mac -> {lat, lon}."""
+    """Load manually measured UniFi device positions. Returns dict of mac (lowercase) -> {lat, lon}."""
     if not os.path.exists(UNIFI_POSITION_LOOKUP):
         return {}
     try:
         with open(UNIFI_POSITION_LOOKUP, encoding="utf-8") as f:
             data = json.load(f)
-        return {k: v for k, v in data.items() if not k.startswith("_") and isinstance(v, dict)}
+        return {
+            k.lower(): v for k, v in data.items()
+            if not k.startswith("_") and isinstance(v, dict)
+        }
     except (json.JSONDecodeError, OSError):
         return {}
 
@@ -320,11 +324,14 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_cli
                     "lon": loc.get("longitude"),
                 }
 
-    # UniFi devices — only include devices listed in unifi_position_lookup.json
+    # UniFi devices — only include devices listed in unifi_position_lookup.json (MAC match is case-insensitive). Skip UNUSED/DISABLED.
     if isinstance(unifi_devs, list):
         for dev in unifi_devs:
             mac = dev.get("mac")
-            if mac not in position_lookup:
+            if not mac or mac.lower() not in position_lookup:
+                continue
+            name = (dev.get("name") or "").upper()
+            if "UNUSED" in name or "DISABLED" in name:
                 continue
             uplink_mac = dev.get("uplink_mac") or dev.get("uplink", {}).get("uplink_mac")
             combined["unifi"].append(
@@ -410,7 +417,7 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_cli
     centroid_lat = sum(lats) / len(lats) if lats else None
     centroid_lon = sum(lons) / len(lons) if lons else None
     for dev in combined["unifi"]:
-        manual = position_lookup.get(dev["id"])
+        manual = position_lookup.get((dev["id"] or "").lower())
         if manual and manual.get("lat") is not None and manual.get("lon") is not None:
             dev["lat"] = float(manual["lat"])
             dev["lon"] = float(manual["lon"])
@@ -473,6 +480,14 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_cli
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Collect network data for the map.")
+    parser.add_argument(
+        "--list-unifi",
+        action="store_true",
+        help="Print all UniFi devices (mac, name) from API and exit. Use to find MAC for unifi_position_lookup.json",
+    )
+    args = parser.parse_args()
+
     UNIFI_URL = os.getenv("UNIFI_URL")
     UNIFI_KEY = os.getenv("UNIFI_KEY")
     UNIFI_SITE = os.getenv("UNIFI_SITE", "default")
@@ -485,6 +500,17 @@ def main():
         unifi_col = UniFiCollector(UNIFI_URL, UNIFI_KEY, site=UNIFI_SITE)
         unifi_devices = unifi_col.get_devices()
         unifi_clients = unifi_col.get_clients()
+
+    if args.list_unifi:
+        if not unifi_devices:
+            print("No UniFi devices (check UNIFI_URL, UNIFI_KEY, UNIFI_SITE).")
+        else:
+            print("UniFi devices from API (use 'mac' as key in unifi_position_lookup.json):\n")
+            for d in sorted(unifi_devices, key=lambda x: (x.get("name") or "")):
+                mac = (d.get("mac") or "").lower()
+                name = d.get("name") or d.get("mac") or "?"
+                print(f"  \"{mac}\": \"{name}\"")
+        return
 
     uisp_devices, uisp_sites, uisp_links = [], [], []
     if UISP_URL and UISP_KEY:

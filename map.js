@@ -573,11 +573,35 @@
 
     startAnimation();
 
+    // Disable DragPan when pointer is over a node so click doesn't start a drag
+    const layerFilter = (l) => l === deviceLayer || l === linkLayer || l === clientLayer;
+    const dragPan = map.getInteractions().getArray().find((i) => i instanceof ol.interaction.DragPan);
+    if (dragPan && dragPan.setCondition) {
+      const defaultCondition = dragPan.getCondition ? dragPan.getCondition() : () => true;
+      dragPan.setCondition((e) => {
+        if (map.hasFeatureAtPixel(e.pixel, { layerFilter })) return false;
+        return defaultCondition(e);
+      });
+    }
+
+    map.on('pointerdown', (e) => {
+      const hit = map.hasFeatureAtPixel(e.pixel, { layerFilter: (l) => l === deviceLayer || l === linkLayer || l === clientLayer });
+      if (hit) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
     map.on('click', (e) => {
+      let hit = false;
       map.forEachFeatureAtPixel(e.pixel, (f) => {
+        hit = true;
         selectFeature(f);
         return true;
       }, { layerFilter: (l) => l === deviceLayer || l === linkLayer || l === clientLayer });
+      if (hit) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
     });
 
     map.on('pointermove', (e) => {
@@ -705,7 +729,7 @@
       const item = document.querySelector(`.device-item[data-id="${dev.id}"]`);
       if (item) {
         item.classList.add('selected');
-        item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        // Do not scroll: avoids page/sidebar jumping when clicking AP/node on the map
       }
     }
   }
@@ -721,6 +745,17 @@
     }
 
     panel.classList.remove('hidden');
+    // Keep view fixed: save center/zoom, recalc size after layout, then restore so map doesn't jump
+    const view = map.getView();
+    const savedCenter = view.getCenter().slice();
+    const savedZoom = view.getZoom();
+    requestAnimationFrame(() => {
+      if (map) {
+        map.updateSize();
+        view.setCenter(savedCenter);
+        view.setZoom(savedZoom);
+      }
+    });
     const dev = feature.get('device');
     const link = feature.get('link');
     const client = feature.get('client');
@@ -1033,12 +1068,7 @@
 
       item.addEventListener('click', () => {
         selectFeature(feature);
-        const geom = feature.getGeometry();
-        map.getView().animate({
-          center: geom.getCoordinates(),
-          zoom: 18,
-          duration: 500
-        });
+        // Recentering disabled: map stays in place when selecting a device from the list.
       });
 
       list.appendChild(item);
@@ -1249,6 +1279,8 @@
   function startTimelinePlayback() {
     if (timelineFrames.length < 2) return;
     stopTimelinePlayback();
+    // Jump to beginning when user engages play; then play forward from there
+    applyTimelineFrame(0);
     timelinePlaying = true;
     const playBtn = document.getElementById('timeline-play');
     const speedEl = document.getElementById('timeline-speed');
@@ -1313,13 +1345,15 @@
         const slider = document.getElementById('timeline-slider');
         if (slider) {
           slider.max = String(Math.max(0, timelineFrames.length - 1));
-          slider.value = '0';
+          // Default to latest frame (current time); user sees live data until they hit Play
+          const lastIdx = Math.max(0, timelineFrames.length - 1);
+          slider.value = String(lastIdx);
           slider.disabled = timelineFrames.length === 0;
         }
         const playBtn = document.getElementById('timeline-play');
         if (playBtn) playBtn.disabled = timelineFrames.length < 2;
         if (timelineFrames.length > 0) {
-          applyTimelineFrame(0);
+          applyTimelineFrame(Math.max(0, timelineFrames.length - 1));
           if (timelineFrames.length < 2) {
             const label = document.getElementById('timeline-ts');
             if (label) label.textContent = 'Need more samples';
