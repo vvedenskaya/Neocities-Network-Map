@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-04T19:32:03.970996Z",
+  "generated_at": "2026-06-04T20:32:07.332861Z",
   "range_hours": 24,
   "bucket_minutes": 10,
   "frames": [
@@ -33418,7 +33418,3418 @@
       ]
     },
     {
-      "ts": "2026-06-04T19:32:02.733124Z",
+      "ts": "2026-06-04T19:38:03.208782Z",
+      "devices": [
+        {
+          "id": "68:d7:9a:d3:b0:22",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f4:e2:c6:13:ad:72",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:9c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "d8:b3:70:a3:d7:6b",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fc:ec:da:83:dd:ef",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e7:06",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "74:ac:b9:4c:8c:ea",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "58:d6:1f:a4:91:b2",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "68:d7:9a:2a:91:e1",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e6:fa",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:dd:0c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:3d:01",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:d9:7f",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58:d6:1f:a4:4a:ed",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:cc",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "f4:e2:c6:19:bd:35",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "74:ac:b9:4c:91:b8",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "0979e97f-427c-45df-b807-b34102d23319",
+          "source": "uisp",
+          "state": "active",
+          "clients": 14,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "25202924-0409-4d99-aa9c-63bb6a117c19",
+          "source": "uisp",
+          "state": "active",
+          "clients": 3,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "37ae6008-a316-455a-8be8-a8607f531984",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "39ee485a-a87e-4398-9e6a-ff47f7ce387e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e8b59ff-2190-41e0-885d-e67c86a3d74d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6108ce73-f595-41d0-bf3e-4b040a2b5341",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "639ca890-a680-4077-9f08-30360cbaec65",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "source": "uisp",
+          "state": "active",
+          "clients": 8,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "993252c4-6d10-4631-9c43-608b31724000",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 6,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c01fd315-b636-45b7-8203-7dd5df74d610",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df8482e7-d59a-43e2-9fba-5cf23adb6b42",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "source": "uisp",
+          "state": "active",
+          "clients": 5,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        }
+      ],
+      "links": [
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "68:d7:9a:d3:b0:22",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:9c",
+          "to": "f4:e2:c6:13:ad:72",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c7:72",
+          "to": "b4:fb:e4:56:35:9c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "fc:ec:da:83:dd:ef",
+          "to": "d8:b3:70:a3:d7:6b",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:3d:01",
+          "to": "fc:ec:da:83:dd:ef",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "dc:2c:6e:1a:49:d4",
+          "to": "18:e8:29:28:e7:06",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "74:ac:b9:4c:8c:ea",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "58:d6:1f:a4:91:b2",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "74:ac:b9:4c:8c:ea",
+          "to": "68:d7:9a:2a:91:e1",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "18:e8:29:28:e6:fa",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "fc:ec:da:83:dd:0c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c6:33",
+          "to": "b4:fb:e4:56:3d:01",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "fc:ec:da:83:d9:7f",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "58:d6:1f:a4:4a:ed",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "70:a7:41:46:9e:5d",
+          "to": "b4:fb:e4:56:35:cc",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "f4:e2:c6:19:bd:35",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "74:ac:b9:4c:91:b8",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -43
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -59
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -48
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "type": "wireless",
+          "state": "active",
+          "signal": -49
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "type": "wireless",
+          "state": "active",
+          "signal": -46
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -72
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "37ae6008-a316-455a-8be8-a8607f531984",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -60
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -51
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "type": "wireless",
+          "state": "active",
+          "signal": -66
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "type": "wireless",
+          "state": "active",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -63
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -79
+        },
+        {
+          "from": "993252c4-6d10-4631-9c43-608b31724000",
+          "to": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -72
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -89
+        }
+      ]
+    },
+    {
+      "ts": "2026-06-04T19:48:03.319828Z",
+      "devices": [
+        {
+          "id": "68:d7:9a:d3:b0:22",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f4:e2:c6:13:ad:72",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:9c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "d8:b3:70:a3:d7:6b",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fc:ec:da:83:dd:ef",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e7:06",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "74:ac:b9:4c:8c:ea",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "58:d6:1f:a4:91:b2",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "68:d7:9a:2a:91:e1",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e6:fa",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:dd:0c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:3d:01",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:d9:7f",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58:d6:1f:a4:4a:ed",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:cc",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "f4:e2:c6:19:bd:35",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "74:ac:b9:4c:91:b8",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "0979e97f-427c-45df-b807-b34102d23319",
+          "source": "uisp",
+          "state": "active",
+          "clients": 14,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "25202924-0409-4d99-aa9c-63bb6a117c19",
+          "source": "uisp",
+          "state": "active",
+          "clients": 3,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "37ae6008-a316-455a-8be8-a8607f531984",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "39ee485a-a87e-4398-9e6a-ff47f7ce387e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e8b59ff-2190-41e0-885d-e67c86a3d74d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6108ce73-f595-41d0-bf3e-4b040a2b5341",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "639ca890-a680-4077-9f08-30360cbaec65",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "source": "uisp",
+          "state": "active",
+          "clients": 8,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "993252c4-6d10-4631-9c43-608b31724000",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 6,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c01fd315-b636-45b7-8203-7dd5df74d610",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df8482e7-d59a-43e2-9fba-5cf23adb6b42",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "source": "uisp",
+          "state": "active",
+          "clients": 5,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        }
+      ],
+      "links": [
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "68:d7:9a:d3:b0:22",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:9c",
+          "to": "f4:e2:c6:13:ad:72",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c7:72",
+          "to": "b4:fb:e4:56:35:9c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "fc:ec:da:83:dd:ef",
+          "to": "d8:b3:70:a3:d7:6b",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:3d:01",
+          "to": "fc:ec:da:83:dd:ef",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "dc:2c:6e:1a:49:d4",
+          "to": "18:e8:29:28:e7:06",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "74:ac:b9:4c:8c:ea",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "58:d6:1f:a4:91:b2",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "74:ac:b9:4c:8c:ea",
+          "to": "68:d7:9a:2a:91:e1",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "18:e8:29:28:e6:fa",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "fc:ec:da:83:dd:0c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c6:33",
+          "to": "b4:fb:e4:56:3d:01",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "fc:ec:da:83:d9:7f",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "58:d6:1f:a4:4a:ed",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "70:a7:41:46:9e:5d",
+          "to": "b4:fb:e4:56:35:cc",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "f4:e2:c6:19:bd:35",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "74:ac:b9:4c:91:b8",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "type": "wireless",
+          "state": "active",
+          "signal": -55
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -45
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -59
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -48
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "type": "wireless",
+          "state": "active",
+          "signal": -46
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -71
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "type": "wireless",
+          "state": "active",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "type": "wireless",
+          "state": "active",
+          "signal": -51
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "37ae6008-a316-455a-8be8-a8607f531984",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -61
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -51
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "type": "wireless",
+          "state": "active",
+          "signal": -67
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -79
+        },
+        {
+          "from": "993252c4-6d10-4631-9c43-608b31724000",
+          "to": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -72
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -89
+        }
+      ]
+    },
+    {
+      "ts": "2026-06-04T19:58:03.904597Z",
+      "devices": [
+        {
+          "id": "68:d7:9a:d3:b0:22",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f4:e2:c6:13:ad:72",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:9c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "d8:b3:70:a3:d7:6b",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fc:ec:da:83:dd:ef",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e7:06",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "74:ac:b9:4c:8c:ea",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "58:d6:1f:a4:91:b2",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "68:d7:9a:2a:91:e1",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e6:fa",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:dd:0c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:3d:01",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:d9:7f",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58:d6:1f:a4:4a:ed",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:cc",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "f4:e2:c6:19:bd:35",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "74:ac:b9:4c:91:b8",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "0979e97f-427c-45df-b807-b34102d23319",
+          "source": "uisp",
+          "state": "active",
+          "clients": 14,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "25202924-0409-4d99-aa9c-63bb6a117c19",
+          "source": "uisp",
+          "state": "active",
+          "clients": 3,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "37ae6008-a316-455a-8be8-a8607f531984",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "39ee485a-a87e-4398-9e6a-ff47f7ce387e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e8b59ff-2190-41e0-885d-e67c86a3d74d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6108ce73-f595-41d0-bf3e-4b040a2b5341",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "639ca890-a680-4077-9f08-30360cbaec65",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "source": "uisp",
+          "state": "active",
+          "clients": 8,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "993252c4-6d10-4631-9c43-608b31724000",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 6,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c01fd315-b636-45b7-8203-7dd5df74d610",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df8482e7-d59a-43e2-9fba-5cf23adb6b42",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "source": "uisp",
+          "state": "active",
+          "clients": 5,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        }
+      ],
+      "links": [
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "68:d7:9a:d3:b0:22",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:9c",
+          "to": "f4:e2:c6:13:ad:72",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c7:72",
+          "to": "b4:fb:e4:56:35:9c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "fc:ec:da:83:dd:ef",
+          "to": "d8:b3:70:a3:d7:6b",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:3d:01",
+          "to": "fc:ec:da:83:dd:ef",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "dc:2c:6e:1a:49:d4",
+          "to": "18:e8:29:28:e7:06",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "74:ac:b9:4c:8c:ea",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "58:d6:1f:a4:91:b2",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "74:ac:b9:4c:8c:ea",
+          "to": "68:d7:9a:2a:91:e1",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "18:e8:29:28:e6:fa",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "fc:ec:da:83:dd:0c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c6:33",
+          "to": "b4:fb:e4:56:3d:01",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "fc:ec:da:83:d9:7f",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "58:d6:1f:a4:4a:ed",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "70:a7:41:46:9e:5d",
+          "to": "b4:fb:e4:56:35:cc",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "f4:e2:c6:19:bd:35",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "74:ac:b9:4c:91:b8",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -45
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -59
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -48
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "type": "wireless",
+          "state": "active",
+          "signal": -49
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -71
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "type": "wireless",
+          "state": "active",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "37ae6008-a316-455a-8be8-a8607f531984",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -66
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -60
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -50
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "type": "wireless",
+          "state": "active",
+          "signal": -67
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "type": "wireless",
+          "state": "active",
+          "signal": -49
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -79
+        },
+        {
+          "from": "993252c4-6d10-4631-9c43-608b31724000",
+          "to": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -72
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -89
+        }
+      ]
+    },
+    {
+      "ts": "2026-06-04T20:02:10.641210Z",
       "devices": [
         {
           "id": "68:d7:9a:d3:b0:22",
@@ -34193,7 +37604,7 @@
           "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
           "type": "wireless",
           "state": "active",
-          "signal": -45
+          "signal": -44
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -34214,7 +37625,7 @@
           "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
           "type": "wireless",
           "state": "active",
-          "signal": -64
+          "signal": -63
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -34235,7 +37646,7 @@
           "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
           "type": "wireless",
           "state": "active",
-          "signal": -58
+          "signal": -57
         },
         {
           "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
@@ -34249,7 +37660,7 @@
           "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
           "type": "wireless",
           "state": "active",
-          "signal": -48
+          "signal": -49
         },
         {
           "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
@@ -34291,7 +37702,7 @@
           "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
           "type": "wireless",
           "state": "active",
-          "signal": -51
+          "signal": -52
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -34305,7 +37716,7 @@
           "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
           "type": "wireless",
           "state": "disconnected",
-          "signal": -62
+          "signal": -63
         },
         {
           "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
@@ -34319,14 +37730,14 @@
           "to": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
           "type": "wireless",
           "state": "active",
-          "signal": -62
+          "signal": -61
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
           "to": "26483016-14c1-4650-83e0-7d15915a8a75",
           "type": "wireless",
           "state": "active",
-          "signal": -47
+          "signal": -48
         },
         {
           "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
@@ -34347,7 +37758,7 @@
           "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
           "type": "wireless",
           "state": "active",
-          "signal": -59
+          "signal": -58
         },
         {
           "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
@@ -34368,7 +37779,7 @@
           "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
           "type": "wireless",
           "state": "active",
-          "signal": -61
+          "signal": -60
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -34382,7 +37793,7 @@
           "to": "cc21c11c-e425-4567-921c-465fa30ed85e",
           "type": "wireless",
           "state": "active",
-          "signal": -51
+          "signal": -50
         },
         {
           "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
@@ -34396,7 +37807,7 @@
           "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
           "type": "wireless",
           "state": "active",
-          "signal": -67
+          "signal": -66
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -34438,6 +37849,1143 @@
           "to": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
           "type": "wireless",
           "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "type": "wireless",
+          "state": "active",
+          "signal": -46
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -79
+        },
+        {
+          "from": "993252c4-6d10-4631-9c43-608b31724000",
+          "to": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -72
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -89
+        }
+      ]
+    },
+    {
+      "ts": "2026-06-04T20:32:05.872633Z",
+      "devices": [
+        {
+          "id": "68:d7:9a:d3:b0:22",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f4:e2:c6:13:ad:72",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:9c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "d8:b3:70:a3:d7:6b",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fc:ec:da:83:dd:ef",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e7:06",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "74:ac:b9:4c:8c:ea",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "58:d6:1f:a4:91:b2",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "68:d7:9a:2a:91:e1",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "18:e8:29:28:e6:fa",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:dd:0c",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:3d:01",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "fc:ec:da:83:d9:7f",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58:d6:1f:a4:4a:ed",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b4:fb:e4:56:35:cc",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "f4:e2:c6:19:bd:35",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "74:ac:b9:4c:91:b8",
+          "source": "unifi",
+          "state": 0,
+          "clients": 0,
+          "tx_bytes": 0,
+          "rx_bytes": 0
+        },
+        {
+          "id": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "0979e97f-427c-45df-b807-b34102d23319",
+          "source": "uisp",
+          "state": "active",
+          "clients": 14,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "25202924-0409-4d99-aa9c-63bb6a117c19",
+          "source": "uisp",
+          "state": "active",
+          "clients": 3,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "37ae6008-a316-455a-8be8-a8607f531984",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "39ee485a-a87e-4398-9e6a-ff47f7ce387e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "3e8b59ff-2190-41e0-885d-e67c86a3d74d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6108ce73-f595-41d0-bf3e-4b040a2b5341",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "639ca890-a680-4077-9f08-30360cbaec65",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "source": "uisp",
+          "state": "active",
+          "clients": 8,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "993252c4-6d10-4631-9c43-608b31724000",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "source": "uisp",
+          "state": "active",
+          "clients": 6,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c01fd315-b636-45b7-8203-7dd5df74d610",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "df8482e7-d59a-43e2-9fba-5cf23adb6b42",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "source": "uisp",
+          "state": "active",
+          "clients": 5,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "source": "uisp",
+          "state": "disconnected",
+          "clients": null,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "source": "uisp",
+          "state": "active",
+          "clients": 1,
+          "tx_bytes": null,
+          "rx_bytes": null
+        },
+        {
+          "id": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "source": "uisp",
+          "state": "active",
+          "clients": 0,
+          "tx_bytes": null,
+          "rx_bytes": null
+        }
+      ],
+      "links": [
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "68:d7:9a:d3:b0:22",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:9c",
+          "to": "f4:e2:c6:13:ad:72",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c7:72",
+          "to": "b4:fb:e4:56:35:9c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "fc:ec:da:83:dd:ef",
+          "to": "d8:b3:70:a3:d7:6b",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:3d:01",
+          "to": "fc:ec:da:83:dd:ef",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "dc:2c:6e:1a:49:d4",
+          "to": "18:e8:29:28:e7:06",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e6:fa",
+          "to": "74:ac:b9:4c:8c:ea",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "58:d6:1f:a4:91:b2",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "74:ac:b9:4c:8c:ea",
+          "to": "68:d7:9a:2a:91:e1",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "18:e8:29:28:e6:fa",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "fc:ec:da:83:dd:0c",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "78:45:58:aa:c6:33",
+          "to": "b4:fb:e4:56:3d:01",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:09",
+          "to": "fc:ec:da:83:d9:7f",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "58:d6:1f:a4:4a:ed",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "70:a7:41:46:9e:5d",
+          "to": "b4:fb:e4:56:35:cc",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b4:fb:e4:56:35:cc",
+          "to": "f4:e2:c6:19:bd:35",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "18:e8:29:28:e7:06",
+          "to": "74:ac:b9:4c:91:b8",
+          "type": "wired_unifi",
+          "state": null,
+          "signal": null
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+          "type": "wireless",
+          "state": "active",
+          "signal": -55
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -44
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+          "type": "wireless",
+          "state": "active",
+          "signal": -59
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -48
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+          "type": "wireless",
+          "state": "active",
+          "signal": -63
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "75206fd6-4be8-4135-9899-34099ed9e082",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -58
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "e0e8b15d-e008-4e37-b879-18594b512333",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "744a564e-5e89-402c-a60b-f533db5c5108",
+          "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+          "type": "wireless",
+          "state": "active",
+          "signal": -49
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+          "type": "wireless",
+          "state": "active",
+          "signal": -47
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+          "type": "wireless",
+          "state": "active",
+          "signal": -71
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+          "type": "wireless",
+          "state": "active",
+          "signal": -63
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "bce8e3be-9733-4327-96b3-6fac5445204e",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+          "type": "wireless",
+          "state": "active",
+          "signal": -51
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "639ca890-a680-4077-9f08-30360cbaec65",
+          "type": "wireless",
+          "state": "active",
+          "signal": -57
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -63
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "37ae6008-a316-455a-8be8-a8607f531984",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+          "type": "wireless",
+          "state": "active",
+          "signal": -62
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "26483016-14c1-4650-83e0-7d15915a8a75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+          "to": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -59
+        },
+        {
+          "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+          "to": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+          "type": "wireless",
+          "state": "disconnected",
+          "signal": -61
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
+          "type": "wireless",
+          "state": "active",
+          "signal": -58
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "4bd29cf4-337b-4143-8c97-f3621c224798",
+          "type": "wireless",
+          "state": "active",
+          "signal": -53
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -66
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+          "type": "wireless",
+          "state": "active",
+          "signal": -60
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "8cdaf293-9994-453d-8b4a-5552804b2178",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "cc21c11c-e425-4567-921c-465fa30ed85e",
+          "type": "wireless",
+          "state": "active",
+          "signal": -51
+        },
+        {
+          "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+          "to": "5bec297a-30b9-4684-8a10-32f0310eda06",
+          "type": "wireless",
+          "state": "active",
+          "signal": -64
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+          "type": "wireless",
+          "state": "active",
+          "signal": -66
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+          "type": "wireless",
+          "state": "active",
+          "signal": -48
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "d51b169b-97c6-4401-9012-af517e7ba5da",
+          "type": "wireless",
+          "state": "active",
+          "signal": -60
+        },
+        {
+          "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+          "to": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+          "type": "wireless",
+          "state": "active",
+          "signal": -52
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+          "type": "wireless",
+          "state": "active",
+          "signal": -54
+        },
+        {
+          "from": "0979e97f-427c-45df-b807-b34102d23319",
+          "to": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+          "type": "wireless",
+          "state": "active",
+          "signal": -65
+        },
+        {
+          "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+          "to": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+          "type": "wireless",
+          "state": "active",
           "signal": -57
         },
         {
@@ -34452,7 +39000,7 @@
           "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
           "type": "wireless",
           "state": "active",
-          "signal": -61
+          "signal": -62
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -34508,7 +39056,7 @@
           "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
           "type": "wireless",
           "state": "disconnected",
-          "signal": -62
+          "signal": -63
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
