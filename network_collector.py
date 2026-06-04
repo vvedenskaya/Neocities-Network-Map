@@ -22,6 +22,7 @@ SNAPSHOT_LOG = os.path.join(HISTORY_DIR, "network_snapshots.jsonl")
 TIMELINE_24H = os.path.join(HISTORY_DIR, "timeline_24h.json")
 TIMELINE_7D = os.path.join(HISTORY_DIR, "timeline_7d.json")
 TIMELINE_30D = os.path.join(HISTORY_DIR, "timeline_30d.json")
+TIMELINE_FILES = [TIMELINE_24H, TIMELINE_7D, TIMELINE_30D]
 
 
 def iso_utc_now():
@@ -150,6 +151,208 @@ def write_timeline_7d():
 
 def write_timeline_30d():
     return write_timeline(TIMELINE_30D, hours=24 * 30, bucket_minutes=180)
+
+
+def load_timeline_frames(paths):
+    """Load frame lists from timeline json files."""
+    frames = []
+    for path in paths:
+        if not os.path.exists(path):
+            continue
+        try:
+            with open(path, encoding="utf-8") as f:
+                payload = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            continue
+        file_frames = payload.get("frames", [])
+        if isinstance(file_frames, list):
+            for frame in file_frames:
+                if isinstance(frame, dict):
+                    frames.append(frame)
+    return frames
+
+
+def link_key(link):
+    """Stable key for link dedup; links are undirected for map line rendering."""
+    a = link.get("from")
+    b = link.get("to")
+    t = link.get("type", "wireless")
+    if not a or not b:
+        return None
+    left, right = sorted([str(a), str(b)])
+    return left, right, str(t)
+
+
+def load_historical_wireless_links():
+    """
+    Build a merged historical wireless link set from timeline files.
+    Uses latest timestamped occurrence per undirected endpoint pair.
+    """
+    by_key = {}
+    for frame in load_timeline_frames(TIMELINE_FILES):
+        ts = frame.get("ts", "")
+        for link in frame.get("links", []):
+            if not isinstance(link, dict):
+                continue
+            if link.get("type", "wireless") != "wireless":
+                continue
+            key = link_key(link)
+            if key is None:
+                continue
+            prev = by_key.get(key)
+            if prev is None or ts >= prev.get("_ts", ""):
+                by_key[key] = {
+                    "from": link.get("from"),
+                    "to": link.get("to"),
+                    "type": "wireless",
+                    "state": link.get("state"),
+                    "signal": link.get("signal"),
+                    "_ts": ts,
+                }
+    out = []
+    for item in by_key.values():
+        item.pop("_ts", None)
+        out.append(item)
+    return out
+
+
+def enrich_with_historical_uisp_links(combined, site_map, uisp_position_lookup):
+    """
+    Merge historical UISP links and create placeholder UISP nodes for missing endpoints.
+    This allows old cross-location links to remain visible even when endpoints disappear
+    from the current live API response.
+    """
+    historical_links = load_historical_wireless_links()
+    if not historical_links:
+        return
+
+    existing_link_keys = {k for k in (link_key(l) for l in combined["links"]) if k is not None}
+    for link in historical_links:
+        key = link_key(link)
+        if key is None or key in existing_link_keys:
+            continue
+        combined["links"].append(link)
+        existing_link_keys.add(key)
+
+    # Build current coordinate map from known devices + manual overrides.
+    coords = {}
+    for dev in combined.get("uisp", []):
+        if dev.get("id") and dev.get("lat") is not None and dev.get("lon") is not None:
+            coords[dev["id"]] = (float(dev["lat"]), float(dev["lon"]))
+    for dev in combined.get("unifi", []):
+        if dev.get("id") and dev.get("lat") is not None and dev.get("lon") is not None:
+            coords[dev["id"]] = (float(dev["lat"]), float(dev["lon"]))
+    for dev_id, pos in uisp_position_lookup.items():
+        if pos.get("lat") is not None and pos.get("lon") is not None:
+            coords[dev_id] = (float(pos["lat"]), float(pos["lon"]))
+
+    known_uisp_ids = {d.get("id") for d in combined.get("uisp", []) if d.get("id")}
+
+    # Gather missing wireless endpoints that look like UISP UUIDs.
+    missing = set()
+    neighbors = {}
+    for link in combined.get("links", []):
+        if link.get("type", "wireless") != "wireless":
+            continue
+        a = link.get("from")
+        b = link.get("to")
+        if not a or not b:
+            continue
+        neighbors.setdefault(a, set()).add(b)
+        neighbors.setdefault(b, set()).add(a)
+        for endpoint in (a, b):
+            if endpoint in known_uisp_ids:
+                continue
+            if isinstance(endpoint, str) and "-" in endpoint and len(endpoint) >= 32:
+                missing.add(endpoint)
+
+    # Seed from site coordinates where possible.
+    for endpoint in list(missing):
+        site = site_map.get(endpoint)
+        if site and site.get("lat") is not None and site.get("lon") is not None:
+            coords[endpoint] = (float(site["lat"]), float(site["lon"]))
+
+    # Iteratively infer unknown endpoint coords from known neighbors.
+    changed = True
+    while changed:
+        changed = False
+        for endpoint in list(missing):
+            if endpoint in coords:
+                continue
+            pts = [coords[n] for n in neighbors.get(endpoint, set()) if n in coords]
+            if not pts:
+                continue
+            lat = sum(p[0] for p in pts) / len(pts)
+            lon = sum(p[1] for p in pts) / len(pts)
+            # If only one neighbor is known, nudge the synthetic node slightly so
+            # the recovered line is visible (not zero-length on top of the neighbor).
+            if len(pts) == 1:
+                jitter = ((sum(ord(c) for c in endpoint) % 13) - 6) * 0.00003
+                lat += jitter
+                lon -= jitter
+            coords[endpoint] = (lat, lon)
+            changed = True
+
+    for endpoint in sorted(missing):
+        if endpoint in known_uisp_ids:
+            continue
+        if endpoint not in coords:
+            continue
+        site = site_map.get(endpoint, {})
+        lat, lon = coords[endpoint]
+        combined["uisp"].append(
+            {
+                "id": endpoint,
+                "name": site.get("name") or f"Recovered UISP {endpoint[:8]}",
+                "model": "Recovered UISP endpoint",
+                "type": "site",
+                "state": "active",
+                "clients": 0,
+                "lat": lat,
+                "lon": lon,
+            }
+        )
+        known_uisp_ids.add(endpoint)
+
+
+def compute_map_metadata(points):
+    """
+    Build a stable viewport bounding box from coordinate points.
+    Applies a median-distance focus filter by default so distant outliers
+    don't force an over-zoomed map extent.
+    """
+    if not points:
+        return {}
+
+    lats_all = [p[0] for p in points]
+    lons_all = [p[1] for p in points]
+    med_lat = sorted(lats_all)[len(lats_all) // 2]
+    med_lon = sorted(lons_all)[len(lons_all) // 2]
+
+    focus_filter_deg = float(os.getenv("MAP_FOCUS_FILTER_DEG", "0.03"))
+    focused = points
+    if focus_filter_deg > 0:
+        filtered = [
+            (lat, lon)
+            for lat, lon in points
+            if abs(lat - med_lat) < focus_filter_deg and abs(lon - med_lon) < focus_filter_deg
+        ]
+        # Only use filtered set when there are enough points to form a meaningful viewport.
+        if len(filtered) >= max(5, int(len(points) * 0.2)):
+            focused = filtered
+
+    lats = [p[0] for p in focused]
+    lons = [p[1] for p in focused]
+    lat_min, lat_max = min(lats), max(lats)
+    lon_min, lon_max = min(lons), max(lons)
+    pad_lat = (lat_max - lat_min) * 0.1 or 0.001
+    pad_lon = (lon_max - lon_min) * 0.1 or 0.001
+    return {
+        "lat_min": lat_min - pad_lat,
+        "lat_max": lat_max + pad_lat,
+        "lon_min": lon_min - pad_lon,
+        "lon_max": lon_max + pad_lon,
+    }
 
 
 def load_unifi_position_lookup():
@@ -320,6 +523,8 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_cli
             loc = site.get("location") or {}
             if s_id:
                 site_map[s_id] = {
+                    "id": s_id,
+                    "name": site.get("name") or site.get("identification", {}).get("name") or s_id,
                     "lat": loc.get("latitude"),
                     "lon": loc.get("longitude"),
                 }
@@ -388,23 +593,31 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_cli
         all_lons = sorted([x[1] for x in temp_uisp])
         med_lat = all_lats[len(all_lats) // 2]
         med_lon = all_lons[len(all_lons) // 2]
+        # Optional median-distance filter for noisy installs.
+        # Default is disabled so cross-location links (e.g. town <-> Mars) are preserved.
+        # Set UISP_MEDIAN_FILTER_DEG=0.03 (or another value) to enable.
+        median_filter_deg = float(os.getenv("UISP_MEDIAN_FILTER_DEG", "0"))
         for lat, lon, d_id, dev in temp_uisp:
-            if abs(lat - med_lat) < 0.03 and abs(lon - med_lon) < 0.03:
-                lats.append(lat)
-                lons.append(lon)
-                id_info = dev.get("identification") or {}
-                combined["uisp"].append(
-                    {
-                        "id": d_id,
-                        "name": id_info.get("name"),
-                        "model": id_info.get("model"),
-                        "type": id_info.get("type"),
-                        "state": dev.get("overview", {}).get("status"),
-                        "clients": dev.get("overview", {}).get("stationsCount", 0),
-                        "lat": lat,
-                        "lon": lon,
-                    }
-                )
+            if median_filter_deg > 0 and (
+                abs(lat - med_lat) >= median_filter_deg
+                or abs(lon - med_lon) >= median_filter_deg
+            ):
+                continue
+            lats.append(lat)
+            lons.append(lon)
+            id_info = dev.get("identification") or {}
+            combined["uisp"].append(
+                {
+                    "id": d_id,
+                    "name": id_info.get("name"),
+                    "model": id_info.get("model"),
+                    "type": id_info.get("type"),
+                    "state": dev.get("overview", {}).get("status"),
+                    "clients": dev.get("overview", {}).get("stationsCount", 0),
+                    "lat": lat,
+                    "lon": lon,
+                }
+            )
 
     # Apply manual UISP position overrides (from map drag & export)
     for dev in combined["uisp"]:
@@ -463,18 +676,43 @@ def format_network_data(unifi_devs, uisp_devs, uisp_sites, uisp_links, unifi_cli
                     }
                 )
 
+    # Some UISP links terminate at site IDs (not device IDs). Add those site endpoints
+    # as pseudo UISP nodes so renderLinks() can resolve both sides and draw the line.
+    known_ids = {d.get("id") for d in combined["uisp"] if d.get("id")}
+    for link in combined["links"]:
+        for endpoint in (link.get("from"), link.get("to")):
+            if not endpoint or endpoint in known_ids:
+                continue
+            site = site_map.get(endpoint)
+            if not site:
+                continue
+            lat = site.get("lat")
+            lon = site.get("lon")
+            if lat is None or lon is None:
+                continue
+            combined["uisp"].append(
+                {
+                    "id": endpoint,
+                    "name": site.get("name") or f"Site {endpoint}",
+                    "model": "UISP Site",
+                    "type": "site",
+                    "state": "active",
+                    "clients": 0,
+                    "lat": float(lat),
+                    "lon": float(lon),
+                }
+            )
+            known_ids.add(endpoint)
+
+    # Merge historical timeline links and infer missing endpoint coordinates.
+    enrich_with_historical_uisp_links(combined, site_map, uisp_position_lookup)
+
     # Map metadata (bounding box for initial view)
-    if lats and lons:
-        lat_min, lat_max = min(lats), max(lats)
-        lon_min, lon_max = min(lons), max(lons)
-        pad_lat = (lat_max - lat_min) * 0.1 or 0.001
-        pad_lon = (lon_max - lon_min) * 0.1 or 0.001
-        combined["map_metadata"] = {
-            "lat_min": lat_min - pad_lat,
-            "lat_max": lat_max + pad_lat,
-            "lon_min": lon_min - pad_lon,
-            "lon_max": lon_max + pad_lon,
-        }
+    viewport_points = []
+    for dev in combined["uisp"]:
+        if dev.get("lat") is not None and dev.get("lon") is not None:
+            viewport_points.append((float(dev["lat"]), float(dev["lon"])))
+    combined["map_metadata"] = compute_map_metadata(viewport_points)
 
     return combined
 

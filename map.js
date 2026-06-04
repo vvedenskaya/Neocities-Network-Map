@@ -734,28 +734,43 @@
     }
   }
 
+  function updateMapSizePreservingView() {
+    if (!map) return;
+    const view = map.getView();
+    const center = view.getCenter();
+    const resolution = view.getResolution();
+    const rotation = view.getRotation();
+    const savedCenter = center ? center.slice() : null;
+
+    // Wait one extra frame so flex layout settles before OpenLayers recalculates viewport.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        map.updateSize();
+        if (savedCenter) view.setCenter(savedCenter);
+        if (resolution != null) view.setResolution(resolution);
+        if (rotation != null) view.setRotation(rotation);
+      });
+    });
+  }
+
   function showInspector(feature) {
     const panel = document.getElementById('inspector');
     const content = document.getElementById('inspector-content');
     const title = document.getElementById('inspector-title');
+    const wasHidden = panel.classList.contains('hidden');
 
     if (!feature) {
-      panel.classList.add('hidden');
+      if (!wasHidden) {
+        panel.classList.add('hidden');
+        updateMapSizePreservingView();
+      }
       return;
     }
 
     panel.classList.remove('hidden');
-    // Keep view fixed: save center/zoom, recalc size after layout, then restore so map doesn't jump
-    const view = map.getView();
-    const savedCenter = view.getCenter().slice();
-    const savedZoom = view.getZoom();
-    requestAnimationFrame(() => {
-      if (map) {
-        map.updateSize();
-        view.setCenter(savedCenter);
-        view.setZoom(savedZoom);
-      }
-    });
+    if (wasHidden) {
+      updateMapSizePreservingView();
+    }
     const dev = feature.get('device');
     const link = feature.get('link');
     const client = feature.get('client');

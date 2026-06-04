@@ -598,13 +598,44 @@ body {
 }
 
 @media (max-width: 900px) {
-  .main {
+  .header {
     flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .main {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 45vh;
   }
 
   .timeline-panel {
     border-radius: 10px;
     padding: 0.72rem;
+  }
+
+  .map {
+    width: 100%;
+    min-height: 55vh;
+  }
+
+  .inspector {
+    width: 100%;
+    min-width: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    max-height: 45vh;
   }
 
   .timeline-ts {
