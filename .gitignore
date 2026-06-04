@@ -12,9 +12,12 @@ venv/
 env/
 
 # Generated data (run network_collector.py to produce)
-network_data.json
+# Keep the deploy payload tracked, ignore bulky/raw history artifacts.
 network_data.tsv
-history/
+history/*
+!history/timeline_24h.json
+!history/timeline_7d.json
+!history/timeline_30d.json
 
 # Editor
 .idea/
