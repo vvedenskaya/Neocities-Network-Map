@@ -488,33 +488,32 @@
       maxZoom: 22, // Allow OpenLayers to upscale the tiles
     });
 
-    // Drone photo overlay as georeferenced JPEG.
-    const DRONE_IMAGE_URL = 'odm/odm_orthophoto_reduced_8bit.jpg';
-    const DRONE_EXTENT_LONLAT = [-115.7358263, 33.3457243, -115.7107067, 33.3647887];
-    const DRONE_EXTENT_WEB_MERCATOR = ol.proj.transformExtent(
-      DRONE_EXTENT_LONLAT,
-      'EPSG:4326',
-      'EPSG:3857'
-    );
-
+    // Слой с дрон-фото (GeoTIFF из OpenDroneMap)
+    const DRONE_GEOTIFF_URL = 'odm/odm_orthophoto_reduced.tif';
+    const DRONE_EXTENT = [-115.7358263, 33.3457243, -115.7107067, 33.3647887];
+    
     try {
-      const droneSource = new ol.source.ImageStatic({
-        url: DRONE_IMAGE_URL,
-        imageExtent: DRONE_EXTENT_WEB_MERCATOR,
-        projection: 'EPSG:3857',
-      });
-      droneLayer = new ol.layer.Image({
-        source: droneSource,
-        opacity: 0.85,
-        visible: true, // default: drone overlay on
-        zIndex: 1,
-      });
-      droneSource.on('imageloaderror', function () {
-        console.warn('⚠ Ошибка загрузки Drone photo JPG. Проверьте файл odm/odm_orthophoto_reduced_8bit.jpg и сервер.');
-      });
-      console.log('✓ Drone photo JPG слой создан. Включите слой "Drone Photo" в меню.');
+      if (typeof ol.source.GeoTIFF !== 'undefined' && typeof ol.layer.WebGLTile !== 'undefined') {
+        const droneSource = new ol.source.GeoTIFF({
+          sources: [{ url: DRONE_GEOTIFF_URL, normalize: false }],
+          wrapX: false,
+        });
+        // RGB GeoTIFF нужно рендерить через WebGLTile (обычный Tile не поддерживает array data)
+        droneLayer = new ol.layer.WebGLTile({
+          source: droneSource,
+          opacity: 0.85,
+          visible: true, // default: drone overlay on
+          zIndex: 1,
+        });
+        droneSource.on('tileloaderror', function () {
+          console.warn('⚠ Ошибка загрузки тайла GeoTIFF. Проверьте файл odm/odm_orthophoto_reduced.tif и сервер.');
+        });
+        console.log('✓ GeoTIFF слой создан (WebGL). Включите слой "Drone Photo" в меню.');
+      } else {
+        throw new Error('ol.source.GeoTIFF или ol.layer.WebGLTile не определен');
+      }
     } catch (error) {
-      console.error('❌ Не удалось создать слой Drone photo JPG:', error);
+      console.error('❌ Не удалось создать GeoTIFF слой:', error);
       droneLayer = null;
     }
 
@@ -624,7 +623,7 @@
       if (droneLayer) {
         droneLayer.setVisible(e.target.checked);
       } else if (e.target.checked) {
-        console.warn('Слой Drone photo не загружен. Откройте в режиме инкогнито или проверьте: сервер запущен из папки проекта, файл odm/odm_orthophoto_reduced_8bit.jpg существует.');
+        console.warn('Слой Drone photo не загружен. Откройте в режиме инкогнито или проверьте: сервер запущен из папки проекта, файл odm/odm_orthophoto_reduced.tif существует.');
         e.target.checked = false;
       }
     });

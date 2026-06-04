@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-04T19:14:07.108409Z",
+  "generated_at": "2026-06-04T19:32:06.743397Z",
   "range_hours": 720,
   "bucket_minutes": 180,
   "frames": [
@@ -131156,7 +131156,7 @@
       ]
     },
     {
-      "ts": "2026-06-04T19:14:03.032673Z",
+      "ts": "2026-06-04T19:32:02.733124Z",
       "devices": [
         {
           "id": "68:d7:9a:d3:b0:22",
@@ -131924,14 +131924,14 @@
           "to": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
           "type": "wireless",
           "state": "active",
-          "signal": -55
+          "signal": -56
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
           "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
           "type": "wireless",
           "state": "active",
-          "signal": -44
+          "signal": -45
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -131952,7 +131952,7 @@
           "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
           "type": "wireless",
           "state": "active",
-          "signal": -63
+          "signal": -64
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -131973,7 +131973,7 @@
           "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
           "type": "wireless",
           "state": "active",
-          "signal": -57
+          "signal": -58
         },
         {
           "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
@@ -131987,14 +131987,14 @@
           "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
           "type": "wireless",
           "state": "active",
-          "signal": -49
+          "signal": -48
         },
         {
           "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
           "to": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
           "type": "wireless",
           "state": "active",
-          "signal": -46
+          "signal": -47
         },
         {
           "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
@@ -132008,7 +132008,7 @@
           "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
           "type": "wireless",
           "state": "active",
-          "signal": -71
+          "signal": -72
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -132029,7 +132029,7 @@
           "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
           "type": "wireless",
           "state": "active",
-          "signal": -52
+          "signal": -51
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -132043,7 +132043,7 @@
           "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
           "type": "wireless",
           "state": "disconnected",
-          "signal": -63
+          "signal": -62
         },
         {
           "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
@@ -132064,7 +132064,7 @@
           "to": "26483016-14c1-4650-83e0-7d15915a8a75",
           "type": "wireless",
           "state": "active",
-          "signal": -48
+          "signal": -47
         },
         {
           "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
@@ -132085,14 +132085,14 @@
           "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
           "type": "wireless",
           "state": "active",
-          "signal": -58
+          "signal": -59
         },
         {
           "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
           "to": "4bd29cf4-337b-4143-8c97-f3621c224798",
           "type": "wireless",
           "state": "active",
-          "signal": -54
+          "signal": -53
         },
         {
           "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
@@ -132106,7 +132106,7 @@
           "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
           "type": "wireless",
           "state": "active",
-          "signal": -60
+          "signal": -61
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -132134,7 +132134,7 @@
           "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
           "type": "wireless",
           "state": "active",
-          "signal": -66
+          "signal": -67
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
@@ -132148,14 +132148,14 @@
           "to": "d51b169b-97c6-4401-9012-af517e7ba5da",
           "type": "wireless",
           "state": "active",
-          "signal": -60
+          "signal": -57
         },
         {
           "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
           "to": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
           "type": "wireless",
           "state": "active",
-          "signal": -53
+          "signal": -52
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -132169,7 +132169,7 @@
           "to": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
           "type": "wireless",
           "state": "active",
-          "signal": -65
+          "signal": -64
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -132190,7 +132190,7 @@
           "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
           "type": "wireless",
           "state": "active",
-          "signal": -62
+          "signal": -61
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
@@ -132204,14 +132204,14 @@
           "to": "7f66fa3e-5a72-4098-9504-a248c86c1705",
           "type": "wireless",
           "state": "disconnected",
-          "signal": -58
+          "signal": -59
         },
         {
           "from": "0979e97f-427c-45df-b807-b34102d23319",
           "to": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
           "type": "wireless",
           "state": "active",
-          "signal": -52
+          "signal": -53
         },
         {
           "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
@@ -132239,14 +132239,14 @@
           "to": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
           "type": "wireless",
           "state": "active",
-          "signal": -48
+          "signal": -47
         },
         {
           "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
           "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
           "type": "wireless",
           "state": "disconnected",
-          "signal": -63
+          "signal": -62
         },
         {
           "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
