@@ -1,0 +1,1406 @@
+{
+  "unifi": [
+    {
+      "id": "68:d7:9a:d3:b0:22",
+      "name": "AP - Chiba North - B0:22 - AC LR",
+      "type": "uap",
+      "model": "U7LR",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.191",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.362339798282505,
+      "lon": -115.71392516552775
+    },
+    {
+      "id": "f4:e2:c6:13:ad:72",
+      "name": "AP - Freeside - AC Mesh",
+      "type": "uap",
+      "model": "U7MSH",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.162",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.36237480464642,
+      "lon": -115.71283826529792
+    },
+    {
+      "id": "b4:fb:e4:56:35:9c",
+      "name": "Switch - Freeside - 7811 - US 8 PoE 150W",
+      "type": "usw",
+      "model": "US8P150",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.175",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.36237489726415,
+      "lon": -115.71282526519104
+    },
+    {
+      "id": "d8:b3:70:a3:d7:6b",
+      "name": "AP - Tool North West - D7:6B - AC Mesh",
+      "type": "uap",
+      "model": "U7MSH",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.164",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.362946433500014,
+      "lon": -115.71364258110236
+    },
+    {
+      "id": "fc:ec:da:83:dd:ef",
+      "name": "AP - Tool Ceiling - DD:EF - AC Pro",
+      "type": "uap",
+      "model": "U7PG2",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.165",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.36291810889534,
+      "lon": -115.71360299915646
+    },
+    {
+      "id": "18:e8:29:28:e7:06",
+      "name": "Switch - Chiba Silver Box - 7827 - US 8 PoE 150W",
+      "type": "usw",
+      "model": "US8P150",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.182",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.36210973794903,
+      "lon": -115.71390421226583
+    },
+    {
+      "id": "74:ac:b9:4c:8c:ea",
+      "name": "Switch - Chiba Media Lab Desk - 8C:EA - US 8 60W",
+      "type": "usw",
+      "model": "US8P60",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.254",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.36232832731878,
+      "lon": -115.7139258545425
+    },
+    {
+      "id": "58:d6:1f:a4:91:b2",
+      "name": "AP - CoLab - U7 Outdoor",
+      "type": "uap",
+      "model": "UKPW",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.206",
+      "version": "8.4.6.18068",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.3622948504959,
+      "lon": -115.71292631753506
+    },
+    {
+      "id": "68:d7:9a:2a:91:e1",
+      "name": "AP - Chiba Media Lab Ceiling  - Nano HD",
+      "type": "uap",
+      "model": "U7NHD",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.1.3",
+      "version": "6.7.41.15623",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.3623331548838,
+      "lon": -115.71393352794553
+    },
+    {
+      "id": "18:e8:29:28:e6:fa",
+      "name": "Switch - Chiba Media Lab Main - 7823 - US 8 PoE 150W",
+      "type": "usw",
+      "model": "US8P150",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.181",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.36233395611889,
+      "lon": -115.71391292403074
+    },
+    {
+      "id": "fc:ec:da:83:dd:0c",
+      "name": "AP - Chiba Main 1st Floor - DD:0C - AC Pro",
+      "type": "uap",
+      "model": "U7PG2",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.186",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.36209958749639,
+      "lon": -115.713929648225
+    },
+    {
+      "id": "b4:fb:e4:56:3d:01",
+      "name": "Switch - Tool - 7802 - US 8 PoE 150W",
+      "type": "usw",
+      "model": "US8P150",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.244",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.36287494177098,
+      "lon": -115.71350320325205
+    },
+    {
+      "id": "fc:ec:da:83:d9:7f",
+      "name": "AP - CoLab - D9:7F - AC Pro",
+      "type": "uap",
+      "model": "U7PG2",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.219",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.36228,
+      "lon": -115.71295
+    },
+    {
+      "id": "58:d6:1f:a4:4a:ed",
+      "name": "AP - OG - U7 Outdoor",
+      "type": "uap",
+      "model": "UKPW",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.158",
+      "version": "8.4.6.18068",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.36306057463209,
+      "lon": -115.71483478540408
+    },
+    {
+      "id": "b4:fb:e4:56:35:cc",
+      "name": "Switch - OG - 7819 - US 8 PoE 150W",
+      "type": "usw",
+      "model": "US8P150",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.195",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.363007911752646,
+      "lon": -115.7148281548192
+    },
+    {
+      "id": "f4:e2:c6:19:bd:35",
+      "name": "AP - OG Kitchen - AC Mesh",
+      "type": "uap",
+      "model": "U7MSH",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.196",
+      "version": "6.8.2.15592",
+      "uptime": null,
+      "tx_bytes": null,
+      "rx_bytes": null,
+      "lat": 33.36299210541131,
+      "lon": -115.71481146713396
+    },
+    {
+      "id": "74:ac:b9:4c:91:b8",
+      "name": "Switch - Chiba DJ/AV - 91:B8 - US 8 60W",
+      "type": "usw",
+      "model": "US8P60",
+      "state": 0,
+      "clients": 0,
+      "client_list": [],
+      "x": null,
+      "y": null,
+      "ip": "100.72.0.131",
+      "version": "7.2.123.16565",
+      "uptime": null,
+      "tx_bytes": 0,
+      "rx_bytes": 0,
+      "lat": 33.36219829286294,
+      "lon": -115.71402764916263
+    }
+  ],
+  "uisp": [
+    {
+      "id": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+      "name": "neocity-rf-f4cc-uranus",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.351207,
+      "lon": -115.732572
+    },
+    {
+      "id": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+      "name": "neocity-rf-1121-juicy",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353549,
+      "lon": -115.7315
+    },
+    {
+      "id": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+      "name": "neocity-rf-9961-muzikmuzeum",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.351153,
+      "lon": -115.733618
+    },
+    {
+      "id": "0979e97f-427c-45df-b807-b34102d23319",
+      "name": "chowtower-rf-sector-se",
+      "model": "LAP-GPS",
+      "type": "airMax",
+      "state": "active",
+      "clients": 14,
+      "lat": 33.352331,
+      "lon": -115.730964
+    },
+    {
+      "id": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+      "name": "neocity-rf-a2c6",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.351057,
+      "lon": -115.728786
+    },
+    {
+      "id": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+      "name": "neocity-rf-64ae-kazegama",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.352791,
+      "lon": -115.727102
+    },
+    {
+      "id": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+      "name": "neocity-rf-b58a",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353559,
+      "lon": -115.732689
+    },
+    {
+      "id": "25202924-0409-4d99-aa9c-63bb6a117c19",
+      "name": "tao-rf-sector",
+      "model": "LAP-120",
+      "type": "airMax",
+      "state": "active",
+      "clients": 3,
+      "lat": 34.094973,
+      "lon": -116.479931
+    },
+    {
+      "id": "26483016-14c1-4650-83e0-7d15915a8a75",
+      "name": "neocity-rf-20d2-kona",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353068,
+      "lon": -115.728937
+    },
+    {
+      "id": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+      "name": "neocity-rf-32c2-joe",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.350084,
+      "lon": -115.733518
+    },
+    {
+      "id": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+      "name": "neocity-rf-90d7-chowmart",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.352629,
+      "lon": -115.733733
+    },
+    {
+      "id": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+      "name": "neocity-rf-9a92-limbolounge",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.351641,
+      "lon": -115.728816
+    },
+    {
+      "id": "37ae6008-a316-455a-8be8-a8607f531984",
+      "name": "mars-rf-c7:72-freeside",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.3623813245859,
+      "lon": -115.71285942570097
+    },
+    {
+      "id": "39ee485a-a87e-4398-9e6a-ff47f7ce387e",
+      "name": "venus-rf-sector-e",
+      "model": "LAP-120",
+      "type": "airMax",
+      "state": "active",
+      "clients": 0,
+      "lat": 33.354118,
+      "lon": -115.729045
+    },
+    {
+      "id": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+      "name": "neocity-rf-68ca-kim",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.351802,
+      "lon": -115.726156
+    },
+    {
+      "id": "3e8b59ff-2190-41e0-885d-e67c86a3d74d",
+      "name": "tao-rf-st-3:ba",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 34.095,
+      "lon": -116.4799
+    },
+    {
+      "id": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+      "name": "neocity-rf-6736-rhonda",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.349782,
+      "lon": -115.731951
+    },
+    {
+      "id": "4bd29cf4-337b-4143-8c97-f3621c224798",
+      "name": "Dada",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.352589,
+      "lon": -115.728085
+    },
+    {
+      "id": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+      "name": "neocity-rf-53c2-mercury",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.351221,
+      "lon": -115.730496
+    },
+    {
+      "id": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+      "name": "neocity-rf-98ef",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.34995,
+      "lon": -115.73264
+    },
+    {
+      "id": "5bffc7e7-8423-463b-8921-173bac33afd7",
+      "name": "neocity-rf-932a-institute",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.349186,
+      "lon": -115.726604
+    },
+    {
+      "id": "6108ce73-f595-41d0-bf3e-4b040a2b5341",
+      "name": "tao-rf-st-0:34",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 34.095,
+      "lon": -116.4799
+    },
+    {
+      "id": "639ca890-a680-4077-9f08-30360cbaec65",
+      "name": "neocity-rf-seva",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.350425,
+      "lon": -115.729371
+    },
+    {
+      "id": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+      "name": "neocity-rf-39b8-dragonflyhouse",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.352237,
+      "lon": -115.729806
+    },
+    {
+      "id": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+      "name": "Palazzo",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.354137,
+      "lon": -115.729691
+    },
+    {
+      "id": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+      "name": "Tile House",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.349745,
+      "lon": -115.729829
+    },
+    {
+      "id": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "name": "chowtower-rf-sector-sw",
+      "model": "LAP-GPS",
+      "type": "airMax",
+      "state": "active",
+      "clients": 8,
+      "lat": 33.352227,
+      "lon": -115.731007
+    },
+    {
+      "id": "744a564e-5e89-402c-a60b-f533db5c5108",
+      "name": "venus-rf-ptp-chowtower-05",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.354059,
+      "lon": -115.729223
+    },
+    {
+      "id": "75206fd6-4be8-4135-9899-34099ed9e082",
+      "name": "neocity-rf-a1fb-zigzag",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.349092,
+      "lon": -115.725982
+    },
+    {
+      "id": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+      "name": "neocity-rf-0763-sharonda",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": null,
+      "lat": 33.35206,
+      "lon": -115.732672
+    },
+    {
+      "id": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+      "name": "neocity-rf-0403-john",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353233,
+      "lon": -115.728678
+    },
+    {
+      "id": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+      "name": "mars-rf-sector-n",
+      "model": "LAP-120",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 0,
+      "lat": 33.36233461157279,
+      "lon": -115.71395686256709
+    },
+    {
+      "id": "8cdaf293-9994-453d-8b4a-5552804b2178",
+      "name": "neocity-rf-1a25-salthouse",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.350876,
+      "lon": -115.726142
+    },
+    {
+      "id": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+      "name": "neocity-rf-2e6d-sunflowerlabs",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.349573,
+      "lon": -115.730947
+    },
+    {
+      "id": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+      "name": "neocity-rf-25d4-raphalots",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.349088,
+      "lon": -115.730342
+    },
+    {
+      "id": "993252c4-6d10-4631-9c43-608b31724000",
+      "name": "venus-rf-ptp-mars-60",
+      "model": "GBE-LR",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 0,
+      "lat": 33.354118,
+      "lon": -115.729045
+    },
+    {
+      "id": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+      "name": "neocity-rf-1015-legion",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.34853,
+      "lon": -115.726579
+    },
+    {
+      "id": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+      "name": "neocity-rf-ce67",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353053,
+      "lon": -115.729931
+    },
+    {
+      "id": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+      "name": "mars-rf-262b - colab",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.362274963334784,
+      "lon": -115.71293573128058
+    },
+    {
+      "id": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "name": "venus-rf-sector-s",
+      "model": "LAP-120",
+      "type": "airMax",
+      "state": "active",
+      "clients": 6,
+      "lat": 33.354118,
+      "lon": -115.729045
+    },
+    {
+      "id": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+      "name": "mars-rf-og-camp-9e:5d",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.36298730519488,
+      "lon": -115.71483476644546
+    },
+    {
+      "id": "bce8e3be-9733-4327-96b3-6fac5445204e",
+      "name": "neocity-rf-06e9-compoundz",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.350559,
+      "lon": -115.730425
+    },
+    {
+      "id": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+      "name": "neocity-rf-7de1-wormhole",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.350066,
+      "lon": -115.728881
+    },
+    {
+      "id": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+      "name": "neocity-rf-19b8-electriclounge",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.352036,
+      "lon": -115.729826
+    },
+    {
+      "id": "c01fd315-b636-45b7-8203-7dd5df74d610",
+      "name": "tao-rf-library-8:45",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 34.095,
+      "lon": -116.4799
+    },
+    {
+      "id": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+      "name": "Kim's Rental",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.347313,
+      "lon": -115.729562
+    },
+    {
+      "id": "cc21c11c-e425-4567-921c-465fa30ed85e",
+      "name": "2115 - Vlad ",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.349913,
+      "lon": -115.729329
+    },
+    {
+      "id": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+      "name": "neocity-rf-kamartaj-05",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": null,
+      "lat": 33.353676,
+      "lon": -115.72869
+    },
+    {
+      "id": "d51b169b-97c6-4401-9012-af517e7ba5da",
+      "name": "Saturn",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353,
+      "lon": -115.732107
+    },
+    {
+      "id": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+      "name": "neocity-rf-aa67-skullpony",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.350539,
+      "lon": -115.729843
+    },
+    {
+      "id": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+      "name": "neocity-rf-9e62-bbac",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.353174,
+      "lon": -115.730525
+    },
+    {
+      "id": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+      "name": "mars-rf-1c:f3",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.362699,
+      "lon": -115.71283
+    },
+    {
+      "id": "df8482e7-d59a-43e2-9fba-5cf23adb6b42",
+      "name": "venus-rf-ptp-spa-05",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 0,
+      "lat": 33.3541,
+      "lon": -115.729
+    },
+    {
+      "id": "e0e8b15d-e008-4e37-b879-18594b512333",
+      "name": "mars-rf-tool-983a",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.36284923222078,
+      "lon": -115.71352585155572
+    },
+    {
+      "id": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+      "name": "neocity-rf-a4b2-hunky",
+      "model": "Loco5AC",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.350833,
+      "lon": -115.729321
+    },
+    {
+      "id": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "name": "chowtower-rf-sector-n",
+      "model": "LAP-GPS",
+      "type": "airMax",
+      "state": "active",
+      "clients": 5,
+      "lat": 33.352331,
+      "lon": -115.731019
+    },
+    {
+      "id": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+      "name": "mars-rf-ptp-venus-60",
+      "model": "GBE-LR",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.36208065870815,
+      "lon": -115.7140109080056
+    },
+    {
+      "id": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+      "name": "mars-rf-og-rvs-85:92",
+      "model": "NBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.363125245542236,
+      "lon": -115.71436326401442
+    },
+    {
+      "id": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+      "name": "mars-rf-sector-e",
+      "model": "LAP-120",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": 1,
+      "lat": 33.362348666937564,
+      "lon": -115.71383809562928
+    },
+    {
+      "id": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+      "name": "Pirates",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "disconnected",
+      "clients": null,
+      "lat": 33.350836,
+      "lon": -115.729954
+    },
+    {
+      "id": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+      "name": "neocity-rf-e6c2-ivan",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.351792,
+      "lon": -115.729214
+    },
+    {
+      "id": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+      "name": "chowtower-rf-ptp-venus-05",
+      "model": "LBE-5AC-Gen2",
+      "type": "airMax",
+      "state": "active",
+      "clients": 1,
+      "lat": 33.352337,
+      "lon": -115.730971
+    },
+    {
+      "id": "5bec297a-30b9-4684-8a10-32f0310eda06",
+      "name": "Recovered UISP 5bec297a",
+      "model": "Recovered UISP endpoint",
+      "type": "site",
+      "state": "active",
+      "clients": 0,
+      "lat": 33.352331,
+      "lon": -115.731019
+    }
+  ],
+  "links": [
+    {
+      "from": "18:e8:29:28:e6:fa",
+      "to": "68:d7:9a:d3:b0:22",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b4:fb:e4:56:35:9c",
+      "to": "f4:e2:c6:13:ad:72",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "78:45:58:aa:c7:72",
+      "to": "b4:fb:e4:56:35:9c",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "fc:ec:da:83:dd:ef",
+      "to": "d8:b3:70:a3:d7:6b",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b4:fb:e4:56:3d:01",
+      "to": "fc:ec:da:83:dd:ef",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "dc:2c:6e:1a:49:d4",
+      "to": "18:e8:29:28:e7:06",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "18:e8:29:28:e6:fa",
+      "to": "74:ac:b9:4c:8c:ea",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b4:fb:e4:56:35:09",
+      "to": "58:d6:1f:a4:91:b2",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "74:ac:b9:4c:8c:ea",
+      "to": "68:d7:9a:2a:91:e1",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "18:e8:29:28:e7:06",
+      "to": "18:e8:29:28:e6:fa",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "18:e8:29:28:e7:06",
+      "to": "fc:ec:da:83:dd:0c",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "78:45:58:aa:c6:33",
+      "to": "b4:fb:e4:56:3d:01",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b4:fb:e4:56:35:09",
+      "to": "fc:ec:da:83:d9:7f",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b4:fb:e4:56:35:cc",
+      "to": "58:d6:1f:a4:4a:ed",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "70:a7:41:46:9e:5d",
+      "to": "b4:fb:e4:56:35:cc",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b4:fb:e4:56:35:cc",
+      "to": "f4:e2:c6:19:bd:35",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "18:e8:29:28:e7:06",
+      "to": "74:ac:b9:4c:91:b8",
+      "type": "wired_unifi"
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "c780b542-8a96-4126-a4ec-4a9d86a4fa31",
+      "type": "wireless",
+      "state": "active",
+      "signal": -55
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "f9c5fe82-9baf-4f4d-9351-4f05e42a81d3",
+      "type": "wireless",
+      "state": "active",
+      "signal": -44
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "a9ca9f73-f9eb-4c96-9d93-001ef37d82a5",
+      "type": "wireless",
+      "state": "active",
+      "signal": -59
+    },
+    {
+      "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+      "to": "df2f0fe9-6f0d-4a6e-8c02-49b794e6f32e",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -48
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "be072dba-c5e1-4673-9eaf-3e82e2f2b595",
+      "type": "wireless",
+      "state": "active",
+      "signal": -63
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "75206fd6-4be8-4135-9899-34099ed9e082",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -58
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "23f4e266-e92b-4cfa-9020-edede5a345d3",
+      "type": "wireless",
+      "state": "active",
+      "signal": -58
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "24ffc64f-6994-4a66-b85b-2a0a492c6608",
+      "type": "wireless",
+      "state": "active",
+      "signal": -57
+    },
+    {
+      "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+      "to": "e0e8b15d-e008-4e37-b879-18594b512333",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -59
+    },
+    {
+      "from": "744a564e-5e89-402c-a60b-f533db5c5108",
+      "to": "fb048707-36cb-4fcb-8ffb-3882fdd34776",
+      "type": "wireless",
+      "state": "active",
+      "signal": -49
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "6f5429d3-6c62-459f-9af0-134f33a66f0b",
+      "type": "wireless",
+      "state": "active",
+      "signal": -46
+    },
+    {
+      "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+      "to": "b6125f83-3a1c-4342-89cb-c140b5c2ec0e",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -61
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+      "type": "wireless",
+      "state": "active",
+      "signal": -71
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "044d6203-da4b-49ad-8524-ac4ea3a58502",
+      "type": "wireless",
+      "state": "active",
+      "signal": -63
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "bce8e3be-9733-4327-96b3-6fac5445204e",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -61
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "4b779819-694e-47b7-a6d7-f2c20f23e56c",
+      "type": "wireless",
+      "state": "active",
+      "signal": -52
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "639ca890-a680-4077-9f08-30360cbaec65",
+      "type": "wireless",
+      "state": "active",
+      "signal": -57
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "f810dd0b-34c5-408d-8e86-6c22dd941eaa",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -63
+    },
+    {
+      "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+      "to": "37ae6008-a316-455a-8be8-a8607f531984",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -59
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "a47fc5fc-9f29-4ff8-aff1-05b389fc5f67",
+      "type": "wireless",
+      "state": "active",
+      "signal": -62
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "26483016-14c1-4650-83e0-7d15915a8a75",
+      "type": "wireless",
+      "state": "active",
+      "signal": -48
+    },
+    {
+      "from": "eccc12b5-0665-4b4c-8695-ffbfa4abf7eb",
+      "to": "b1b8511b-311c-4877-a907-6dfe23de3c43",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -59
+    },
+    {
+      "from": "875d2133-a7d2-4889-91ee-5d895a5d2cda",
+      "to": "e72959fb-664a-4a69-9405-0cc4717a08a8",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -61
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "5bffc7e7-8423-463b-8921-173bac33afd7",
+      "type": "wireless",
+      "state": "active",
+      "signal": -58
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "4bd29cf4-337b-4143-8c97-f3621c224798",
+      "type": "wireless",
+      "state": "active",
+      "signal": -54
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "dec86eef-3b49-4a80-a235-396b6c5dc71e",
+      "type": "wireless",
+      "state": "active",
+      "signal": -65
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+      "type": "wireless",
+      "state": "active",
+      "signal": -60
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "8cdaf293-9994-453d-8b4a-5552804b2178",
+      "type": "wireless",
+      "state": "active",
+      "signal": -54
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "cc21c11c-e425-4567-921c-465fa30ed85e",
+      "type": "wireless",
+      "state": "active",
+      "signal": -51
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "5bec297a-30b9-4684-8a10-32f0310eda06",
+      "type": "wireless",
+      "state": "active",
+      "signal": -65
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "2f54a1f1-3093-410f-8858-e6b342251b5a",
+      "type": "wireless",
+      "state": "active",
+      "signal": -66
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "6d4601f9-c248-40ec-b9fe-9ca1dfd94b03",
+      "type": "wireless",
+      "state": "active",
+      "signal": -48
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "d51b169b-97c6-4401-9012-af517e7ba5da",
+      "type": "wireless",
+      "state": "active",
+      "signal": -60
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "6f889ad1-fe9e-45c0-8e18-930a842ebdd4",
+      "type": "wireless",
+      "state": "active",
+      "signal": -53
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "4d8cf039-65c5-44a6-8d38-0a5f733f8f75",
+      "type": "wireless",
+      "state": "active",
+      "signal": -54
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "3e6e48c9-b16c-403e-8b5f-586aa832d4e8",
+      "type": "wireless",
+      "state": "active",
+      "signal": -65
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "00efdd2f-2ec8-440a-b830-abcf6295ee3f",
+      "type": "wireless",
+      "state": "active",
+      "signal": -57
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "8fc88e0d-a873-4e90-a6fc-256159986e45",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -58
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "2a717dc5-f9a2-418c-8300-e0ede1eec6af",
+      "type": "wireless",
+      "state": "active",
+      "signal": -62
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "8f7d233a-c162-4e4e-aba6-a8b0665ec057",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -61
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "7f66fa3e-5a72-4098-9504-a248c86c1705",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -58
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "80aa8bf6-6fe0-4ee9-9cd7-39066d692c8f",
+      "type": "wireless",
+      "state": "active",
+      "signal": -52
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "030592e4-3b86-42d9-8ea8-2933b1898dd9",
+      "type": "wireless",
+      "state": "active",
+      "signal": -47
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "14c273fe-0442-4615-ac82-8ed326adbb2e",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -58
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "e562bbc9-300e-4bed-8ba1-baac3ce464b5",
+      "type": "wireless",
+      "state": "active",
+      "signal": -64
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "be2e84a2-95f3-4d1f-adbd-250acb3b8bfd",
+      "type": "wireless",
+      "state": "active",
+      "signal": -48
+    },
+    {
+      "from": "b3c1a939-7287-4083-8ff9-1036d138411d",
+      "to": "ce103bd9-69b3-46cf-b3c2-fbb518601878",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -63
+    },
+    {
+      "from": "7065f183-8b4d-46cc-9ede-52da22d3afec",
+      "to": "58c1e776-e669-4b43-b86d-cbd172d088a3",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -61
+    },
+    {
+      "from": "e6d83610-8f49-4ebf-9f1e-dd341078a551",
+      "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+      "type": "wireless",
+      "state": "active",
+      "signal": -79
+    },
+    {
+      "from": "993252c4-6d10-4631-9c43-608b31724000",
+      "to": "e718ccbd-3844-49d5-9e5f-7b90fa96c240",
+      "type": "wireless",
+      "state": "disconnected",
+      "signal": -62
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "639ca890-a680-4077-9f08-30360cbaec65",
+      "type": "wireless",
+      "state": "active",
+      "signal": -57
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "db8051ca-5e26-455d-9b0f-a929fcfe3bab",
+      "type": "wireless",
+      "state": "active",
+      "signal": -72
+    },
+    {
+      "from": "0979e97f-427c-45df-b807-b34102d23319",
+      "to": "2828f6e2-8d69-4dc4-b86b-980d115641d3",
+      "type": "wireless",
+      "state": "active",
+      "signal": -89
+    }
+  ],
+  "map_metadata": {
+    "lat_min": 33.34573177544578,
+    "lat_max": 33.36470647009646,
+    "lon_min": -115.7358233,
+    "lon_max": -115.71073969999999
+  }
+}
